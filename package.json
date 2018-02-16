@@ -4,7 +4,6 @@
   "description": "Senior Project",
   "main": "index.js",
   "dependencies": {
-    "antd": "^3.2.1",
     "npm-4": "^2.1.1"
   },
   "devDependencies": {},
