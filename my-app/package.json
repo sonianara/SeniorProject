@@ -22,7 +22,8 @@
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
-    "react-native-button": "^2.3.0",
+    "react-native-material-bottom-navigation": "^0.8.1",
+    "react-native-settings-list": "^1.8.0",
     "watchman": "^1.0.0"
   }
 }
