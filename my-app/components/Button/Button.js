@@ -10,7 +10,6 @@ export default class ButtonComponent extends Component {
       console.log('Pressed!');
    }
 
-
    render() {
       return (
          <Button 
