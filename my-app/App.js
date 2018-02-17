@@ -1,14 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Button from './components/Button/Button.js';
+import MenuBar from './components/NavigationBar/MenuBar.js';
+import AccountSettings from './screens/Settings/AccountSettings.js';
+import ProfileSettings from './screens/Settings/ProfileSettings.js';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      //<View style={styles.container}>
+	<ProfileSettings></ProfileSettings>
+        //<Text>Open up App.js to start working on your app!</Text>
+        //<Text>Changes you make will automatically reload.</Text>
+        //<Text>Shake your phone to open the developer menu.</Text>
+      	//<Button></Button>
+	//<MenuBar></MenuBar>
+	//</View>
     );
   }
 }
