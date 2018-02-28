@@ -1,19 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Button from './components/Button/Button.js';
-import MenuBar from './components/NavigationBar/MenuBar.js';
-import AccountSettings from './screens/Settings/AccountSettings.js';
-import ProfileSettings from './screens/Settings/ProfileSettings.js';
-import MessageList from './components/Message/MessageList.js';
-
-import ProfileScreen from './screens/Profile/ProfileScreen';
+import React, { Component } from 'react';
+import { Tabs } from './config/routes.js';
 
 export default class App extends React.Component {
   render() {
+    return <Tabs />;
+  }
+}
+
+
+/*
+export default class App extends React.Component {
+  render() {
     return (
-	<MessageList></MessageList>
+	//<MessageList></MessageList>
       //<View style={styles.container}>
-	//<ProfileSettings></ProfileSettings>
+	<ProfileSettings></ProfileSettings>
         //<Text>Open up App.js to start working on your app!</Text>
         //<Text>Changes you make will automatically reload.</Text>
         //<Text>Shake your phone to open the developer menu.</Text>
@@ -22,7 +23,7 @@ export default class App extends React.Component {
 	//</View>
     );
   }
-}
+}*/
 
 // const styles = StyleSheet.create({
 //   container: {
