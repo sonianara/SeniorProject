@@ -1,23 +1,27 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Alert, TouchableHighlight } from 'react-native';
-import facebookLogo from './loginWithFacebook.png';
-import appLogo from './appLogo.png';
+import facebookLogo from '../../resources/loginWithFacebook.png';
+import appLogo from '../../resources/appLogo.png';
 import Button from 'react-native-button';
+
+import ProfileScreen from '../../screens/Profile/ProfileScreen.js';
 
 export default class LoginScreen extends React.Component {
    constructor(props) {
       super(props);
    }
 
-   handlePress() {
-      Alert.alert("Clicked", "button clicked");
+   loginWithFb = () => {
+      const { state, navigate } = this.props.navigation;
+      Alert.alert('Placeholder for steps to login with Facebook');
+      navigate('ProfileScreen', { go_back_key: state.key });
    }
 
    render() {
       return (
          <View style={styles.container}>
             <Image style={{width: "80%", height: "10%"}} source={appLogo}/>
-            <TouchableHighlight onPress={this.handlePress.bind(this)}>
+            <TouchableHighlight onPress={this.loginWithFb.bind(this)}>
                <Image source={facebookLogo} resizeMode={"center"} />
            </TouchableHighlight>
          </View>
