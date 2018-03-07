@@ -3,23 +3,16 @@ import { Alert, StyleSheet, ScrollView, Text, TouchableHighlight, View, Image } 
 import Button from 'react-native-button';
 import defaultImage from '../../resources/defaultUser.png'
 import * as Constants from '../../resources/LoremIpsum.js';
-import editIcon from '../../resources/editIcon.png';
-import uploadIcon from '../../resources/uploadIcon.png';
-import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
+import PropTypes from 'prop-types';
 
-
-export default class ProfileScreen extends React.Component {
+export default class ExploreScreen extends React.Component {
    constructor(props) {
       super(props);
    }
 
-   uploadImage = () => {
-     Alert.alert('Route to upload dialog');
-   }
-
-   editPage = () => {
-     Alert.alert('Switch to edit mode');
+   newMessage = () => {
+     Alert.alert('Message this person!');
    }
 
    render() {
@@ -29,24 +22,18 @@ export default class ProfileScreen extends React.Component {
         <View style={{backgroundColor:'#EFEFF4', flex:1}}>
             <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
 	            <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>
-                 My Profile
+                 Explore
               </Text>
 	          </View>
-            <View style={{borderBottomWidth:1, flexDirection:"row", alignSelf:"flex-end"}}>
-               <TouchableHighlight onPress={this.uploadImage.bind(this)}>
-                  {/* <Image source={uploadIcon} style={{left:10, width: 40, height: 40}} /> */}
-                  <Icon name="upload" type="material-community" size={35} />
-               </TouchableHighlight>
-               <Text>   </Text>
-               <TouchableHighlight onPress={this.editPage.bind(this)} >
-                  {/* <Image source={editIcon} style={{left:280, width: 40, height: 40}} /> */}
-                  <Icon name="edit" type="entypo" size={35} />
+            <View style={{borderBottomWidth:1, backgroundColor: '#fff', flexDirection:"row", alignSelf:"flex-end"}}>
+               <TouchableHighlight onPress={this.newMessage.bind(this)} >
+                  <Icon name="chat" size={35} />
                </TouchableHighlight>
 	          </View>
 	          <View style={styles.container} >
                <Image source={defaultImage} style={{width: 270, height: 270}} />
                <Text style={{ marginLeft:20, marginTop:10, marginBottom:10, fontSize:32}} >
-                  John Appleseed, 21
+                  Stacey Smith, 27
                </Text>
                <ScrollView style={{width: "85%"}}>
                   <Text >{loremIpsum}</Text>
