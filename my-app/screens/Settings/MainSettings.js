@@ -13,15 +13,16 @@ export default class MainSettingsComponent extends Component {
       this.state = {switchValue: false};
    }
    render() {
-      const { state, navigate } = this.props.navigation;
 
+      const { state, navigate } = this.props.navigation;
       var bgColor = '#DCE3F4';
+
       return (
          <View style={{backgroundColor:'#EFEFF4', flex:1}}>
             <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
 	             <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>Main Settings</Text>
 	          </View>
-	          <View style={{backgroundColor:'#EFEFF4', flex:1}}>
+	          <View>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
 	              <SettingsList.Item hasNavArrow={true} title='Profile Settings'

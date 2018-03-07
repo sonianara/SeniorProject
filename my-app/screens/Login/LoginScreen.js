@@ -4,7 +4,7 @@ import facebookLogo from '../../resources/loginWithFacebook.png';
 import appLogo from '../../resources/appLogo.png';
 import Button from 'react-native-button';
 
-import ProfileScreen from '../../screens/Profile/ProfileScreen.js';
+import ExploreScreen from '../../screens/Profile/ExploreScreen.js';
 
 export default class LoginScreen extends React.Component {
    constructor(props) {
@@ -14,7 +14,7 @@ export default class LoginScreen extends React.Component {
    loginWithFb = () => {
       const { state, navigate } = this.props.navigation;
       Alert.alert('Placeholder for steps to login with Facebook');
-      navigate('ProfileScreen', { go_back_key: state.key });
+      navigate('ExploreScreen', { go_back_key: state.key });
    }
 
    render() {
