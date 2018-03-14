@@ -24,6 +24,11 @@ export default class ProfileScreen extends React.Component {
 
    render() {
       const loremIpsum = Constants.loremIpsum;
+      const { state, navigate } = this.props.navigation;
+      const userInfo = state.params.user;
+      Alert.alert("Welcome " + userInfo.name + "!");
+      const userPhoto = userInfo.picture;
+      const userPhotoData = userPhoto.data;
 
       return (
         <View style={{backgroundColor:'#EFEFF4', flex:1}}>
@@ -34,19 +39,17 @@ export default class ProfileScreen extends React.Component {
 	          </View>
             <View style={{borderBottomWidth:1, flexDirection:"row", alignSelf:"flex-end"}}>
                <TouchableHighlight onPress={this.uploadImage.bind(this)}>
-                  {/* <Image source={uploadIcon} style={{left:10, width: 40, height: 40}} /> */}
                   <Icon name="upload" type="material-community" size={35} />
                </TouchableHighlight>
                <Text>   </Text>
                <TouchableHighlight onPress={this.editPage.bind(this)} >
-                  {/* <Image source={editIcon} style={{left:280, width: 40, height: 40}} /> */}
                   <Icon name="edit" type="entypo" size={35} />
                </TouchableHighlight>
 	          </View>
 	          <View style={styles.container} >
-               <Image source={defaultImage} style={{width: 270, height: 270}} />
+               <Image source={{uri: userPhotoData.url}} style={{width: 50, height: 50}} />
                <Text style={{ marginLeft:20, marginTop:10, marginBottom:10, fontSize:32}} >
-                  John Appleseed, 21
+                  {userInfo.name}
                </Text>
                <ScrollView style={{width: "85%"}}>
                   <Text >{loremIpsum}</Text>
