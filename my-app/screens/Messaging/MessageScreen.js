@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert} from 'react-native';
+import { StyleSheet, Text, View, Alert, Button} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import MessageStream from './MessageStream.js';
+import config from '../../App.js';
+import * as firebase from 'firebase';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
 export default class MessageScreen extends Component {
-  
+
    constructor() {
       super();
       this.onValueChange = this.onValueChange.bind(this);
       this.state = {switchValue: false};
    }
-   
+
    render() {
 
       var bgColor = '#DCE3F4';
@@ -38,6 +40,10 @@ export default class MessageScreen extends Component {
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			             onPress={() => navigate('MessageStream', { go_back_key: state.key })}/>
               </SettingsList>
+              <Button
+                onPress={() => updateDB(1, 2, "Message Content")}
+                title="Add Message"
+              />
            </View>
         </View>
       );
@@ -47,3 +53,10 @@ export default class MessageScreen extends Component {
       this.setState({switchValue: value});
    }
 }
+
+function updateDB(userID, fieldValue1, fieldValue2) {
+   firebase.database().ref(userID).set({
+     field1: fieldValue1,
+     field2: fieldValue2,
+   });
+ }
