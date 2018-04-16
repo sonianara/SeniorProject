@@ -47,7 +47,7 @@ export default class ProfileScreen extends React.Component {
                </TouchableHighlight>
 	          </View>
 	          <View style={styles.container} >
-               <Image source={{uri: userPhotoData.url}} style={{width: 50, height: 50}} />
+               <Image source={{uri: userPhotoData.url}} style={{width: 200, height: 200}} />
                <Text style={{ marginLeft:20, marginTop:10, marginBottom:10, fontSize:32}} >
                   {userInfo.name}
                </Text>

@@ -41,7 +41,7 @@ export default class MessageScreen extends Component {
 			             onPress={() => navigate('MessageStream', { go_back_key: state.key })}/>
               </SettingsList>
               <Button
-                onPress={() => updateDB(1, 2, "Message Content")}
+                onPress={() => updateDB(1, 2, "Message 10")}
                 title="Add Message"
               />
            </View>

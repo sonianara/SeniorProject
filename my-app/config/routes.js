@@ -39,13 +39,6 @@ export const MessageFeedStack = StackNavigator({
 });
 
 export const Tabs = TabNavigator({
-  // Login: {
-  //   screen: Login,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Login',
-  //     tabBarIcon: ({ tintColor }) => <Icon name="book" size={35} color={tintColor} />
-  //   },
-  // },
   MainSettings: {
     screen: SettingsStack,
     navigationOptions: {
@@ -61,20 +54,6 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />
     },
   },
-  // ProfileSettings: {
-  //   screen: ProfileSettings,
-  //   navigationOptions: {
-  //     tabBarLabel: 'P Settings',
-  //     tabBarIcon: ({ tintColor }) => <Icon name="person" size={35} color={tintColor} />
-  //   },
-  // },
-  // AccountSettings: {
-  //   screen: AccountSettings,
-  //   navigationOptions: {
-  //     tabBarLabel: 'A Settings',
-  //     tabBarIcon: ({ tintColor }) => <Icon name="person" size={35} color={tintColor} />
-  //   },
-  // },
   ExploreScreen: {
     screen: ExploreScreen,
     navigationOptions: {
@@ -89,6 +68,14 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="message" size={35} color={tintColor} />
     },
   },
+  /*
+  RegisterScreen: {
+    screen: RegisterScreen,
+    navigationOptions: {
+      tabBarLabel: 'Register',
+      tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />
+    },
+  } */
 });
 
 export const AppRoot = StackNavigator({
@@ -102,4 +89,3 @@ export const AppRoot = StackNavigator({
   mode: 'modal',
   headerMode: 'none',
 });
-
