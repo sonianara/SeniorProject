@@ -22,8 +22,10 @@ export default class LoginScreen extends React.Component {
   addUserToDatabase = (user) => {
     firebase.database().ref('users/user ' + user.id).update({
       "name": user.name,
-      "birthday":user.birthday,
-      "hometown":user.hometown,
+      "birthday":user.birthday ? user.birthday : " ",
+      "hometown": user.hometown ? user.hometown : " ",
+      "gender": user.gender ? user.gender : " ",
+      "email": user.email ? user.email : " ",
     });
   }
 
@@ -31,7 +33,7 @@ export default class LoginScreen extends React.Component {
       const { state, navigate } = this.props.navigation;
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
         APP_ID,
-        { permissions: ['public_profile', 'user_photos', 'user_birthday', 'user_hometown'] }
+        { permissions: ['public_profile', 'user_photos', 'user_birthday', 'user_hometown', 'email'] }
       );
       if (type === 'success') {
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
@@ -39,13 +41,10 @@ export default class LoginScreen extends React.Component {
         firebase.auth().signInWithCredential(credential).catch((error) => {
           // Handle Errors here.
         });
-        const fields = 'name,picture.width(200).height(200),birthday,hometown';
+        const fields = 'name,picture.width(200).height(200),birthday,hometown,gender,email';
         const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
         const userInfo = await response.json();
 
-        if (!this.userExists(userInfo)) {
-          this.addUserToDatabase(userInfo);
-        }
         this.addUserToDatabase(userInfo);
         navigate('ProfileScreen', { go_back_key: state.key, user: userInfo });
       }

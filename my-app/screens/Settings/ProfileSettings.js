@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Alert} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 
 export default class ProfileSettingsComponent extends Component {
-  
+
    constructor() {
       super();
       this.onValueChange = this.onValueChange.bind(this);
@@ -17,18 +17,20 @@ export default class ProfileSettingsComponent extends Component {
 	       <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>Profile Settings</Text>
 	    </View>
 	    <View style={{backgroundColor:'#EFEFF4', flex:1}}>
-               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}> 
+               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                      <SettingsList.Header headerStyle={{marginTop:15}}/>
-	          <SettingsList.Item titleInfo = '22' hasNavArrow={false} title='Age' 
+	          <SettingsList.Item titleInfo = '22' hasNavArrow={false} title='Age'
 			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			onPress={() => Alert.alert('Clicked Age')}/>
-	          <SettingsList.Item titleInfo = 'Male' hasNavArrow={false} title='Gender' 
+	          <SettingsList.Item titleInfo = 'Male' hasNavArrow={false} title='Gender'
 			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}/>
-		  <SettingsList.Item titleInfo = 'Male, Female' hasNavArrow={false} title='Interested In' 
+		  <SettingsList.Item titleInfo = 'Male, Female' hasNavArrow={false} title='Interested In (Gender)'
 			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange} />
-		  <SettingsList.Item titleInfo = '25 miles' hasNavArrow={false} title='Distance' 
-			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}/> 
-		  <SettingsList.Item title = 'Filtered Words' 
+      <SettingsList.Item titleInfo = '20-25' hasNavArrow={false} title='Interested In (Age)'
+			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange} />
+		  <SettingsList.Item titleInfo = '25 miles' hasNavArrow={false} title='Distance'
+			switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}/>
+		  <SettingsList.Item title = 'Filtered Words'
 			onPress={() => Alert.alert('Routing to FilteringWords page')}/>
                </SettingsList>
             </View>
