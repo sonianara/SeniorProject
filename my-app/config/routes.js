@@ -9,6 +9,7 @@ import MessageStream from '../screens/Messaging/MessageStream.js';
 import ProfileScreen from '../screens/Profile/ProfileScreen.js';
 import ExploreScreen from '../screens/Profile/ExploreScreen.js';
 import MainSettings from '../screens/Settings/MainSettings.js';
+import EditSettings from '../screens/Settings/EditSettings.js';
 import LoginScreen from '../screens/Login/LoginScreen.js'
 
 export const SettingsStack = StackNavigator({
@@ -18,12 +19,15 @@ export const SettingsStack = StackNavigator({
   ProfileSettings: {
     screen: ProfileSettings
   },
+  EditSettings: {
+    screen: EditSettings
+  },
   AccountSettings: {
     screen: AccountSettings
   },
   LoginScreen: {
     screen: LoginScreen,
-    navigationOptions:  {
+    navigationOptions: {
       headerLeft: null // Do not show back button for login screen
     }
   }
@@ -86,6 +90,6 @@ export const AppRoot = StackNavigator({
     screen: Tabs
   },
 }, {
-  mode: 'modal',
-  headerMode: 'none',
-});
+    mode: 'modal',
+    headerMode: 'none',
+  });

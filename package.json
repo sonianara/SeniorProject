@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "npm-4": "^2.1.1",
-    "react-native-form-generator": "^0.9.9"
+    "react-native-form-generator": "^0.9.9",
+    "react-native-slider": "^0.11.0"
   },
   "devDependencies": {},
   "scripts": {
