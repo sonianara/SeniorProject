@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Image, Alert, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, Alert, TouchableHighlight, AsyncStorage } from 'react-native';
 import facebookLogo from '../../resources/loginWithFacebook.png';
 import appLogo from '../../resources/appLogo.png';
 import Button from 'react-native-button';
 import * as firebase from 'firebase';
 import config from '../../App.js';
 import ExploreScreen from '../../screens/Profile/ProfileScreen.js';
+import UserInfo from '../../config/userinfo.js';
 
 const APP_ID = "413413412439784";
 
@@ -22,6 +23,7 @@ export default class LoginScreen extends React.Component {
   addUserToDatabase = (user) => {
     firebase.database().ref('users/user ' + user.id).update({
       "name": user.name,
+      "age": 21,
       "birthday": user.birthday ? user.birthday : " ",
       "hometown": user.hometown ? user.hometown : " ",
       "gender": user.gender ? user.gender : " ",
@@ -44,9 +46,9 @@ export default class LoginScreen extends React.Component {
       const fields = 'name,picture.width(200).height(200),birthday,hometown,gender,email';
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
       const userInfo = await response.json();
-
+      UserInfo.saveUser(userInfo);
       this.addUserToDatabase(userInfo);
-      navigate('ProfileScreen', { go_back_key: state.key, user: userInfo });
+      navigate('ProfileScreen', { go_back_key: state.key });
     }
   }
 
