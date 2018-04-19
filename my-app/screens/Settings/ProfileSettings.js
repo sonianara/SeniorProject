@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
-import {UserInfo} from '../../config/userinfo.js';
+import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class ProfileSettingsComponent extends Component {
 

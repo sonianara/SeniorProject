@@ -4,7 +4,7 @@ import Prompt from 'rn-prompt';
 import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
-import {UserInfo} from '../../config/userinfo.js';
+import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class EditSettingsComponent extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class EditSettingsComponent extends Component {
   }
 
   handleEdit = (newValue) => {
-    const userInfo = UserInfo.getUser()
+    const userInfo = getUser();
     this.setState({ inputText: newValue, promptVisible: false });
     firebase.database().ref('users/user ' + userInfo.id).update({
       category: inputText,

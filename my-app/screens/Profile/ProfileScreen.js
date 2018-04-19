@@ -7,57 +7,61 @@ import editIcon from '../../resources/editIcon.png';
 import uploadIcon from '../../resources/uploadIcon.png';
 import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
-import {UserInfo} from '../../config/userinfo.js';
+import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class ProfileScreen extends React.Component {
-   constructor(props) {
-      super(props);
-   }
+  constructor(props) {
+    super(props);
+  }
 
-   uploadImage = () => {
-     Alert.alert('Route to upload dialog');
-   }
+  uploadImage = () => {
+    Alert.alert('Route to upload dialog');
+  }
 
-   editPage = () => {
-     Alert.alert('Switch to edit mode');
-   }
+  editPage = () => {
+    Alert.alert('Switch to edit mode');
+  }
 
-   render() {
-      const userInfo = UserInfo.getUser()
-      const loremIpsum = Constants.loremIpsum;
-      const { state, navigate } = this.props.navigation;
-      Alert.alert("Welcome " + userInfo.name + "!");
-      const userPhoto = userInfo.picture;
-      const userPhotoData = userPhoto.data;
+  render() {
+    const userInfo = getUser().then(function initUser(result) {
+      return result;
+    });
 
-      return (
-        <View style={{backgroundColor:'#EFEFF4', flex:1}}>
-            <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
-	            <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>
-                 My Profile
+    Alert.alert("User info is " + JSON.stringify(userInfo));
+    // const loremIpsum = Constants.loremIpsum;
+    const { state, navigate } = this.props.navigation;
+    Alert.alert("Welcome " + userInfo.name + "!");
+    const userPhoto = userInfo.picture;
+    // const userPhotoData = userPhoto.data;
+
+    return (
+      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
+        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
+          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
+            My Profile
               </Text>
-	          </View>
-            <View style={{borderBottomWidth:1, flexDirection:"row", alignSelf:"flex-end"}}>
-               <TouchableHighlight onPress={this.uploadImage.bind(this)}>
-                  <Icon name="upload" type="material-community" size={35} />
-               </TouchableHighlight>
-               <Text>   </Text>
-               <TouchableHighlight onPress={this.editPage.bind(this)} >
-                  <Icon name="edit" type="entypo" size={35} />
-               </TouchableHighlight>
-	          </View>
-	          <View style={styles.container} >
-               <Image source={{uri: userPhotoData.url}} style={{width: 200, height: 200}} />
-               <Text style={{ marginLeft:20, marginTop:10, marginBottom:10, fontSize:32}} >
-                  {userInfo.name}
-               </Text>
-               <ScrollView style={{width: "85%"}}>
-                  <Text >{loremIpsum}</Text>
-               </ScrollView>
-            </View>
-         </View>
-      );
-   }
+        </View>
+        <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
+          <TouchableHighlight onPress={this.uploadImage.bind(this)}>
+            <Icon name="upload" type="material-community" size={35} />
+          </TouchableHighlight>
+          <Text>   </Text>
+          <TouchableHighlight onPress={this.editPage.bind(this)} >
+            <Icon name="edit" type="entypo" size={35} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.container} >
+          {/* <Image source={{uri: userPhotoData.url}} style={{width: 200, height: 200}} /> */}
+          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
+            {userInfo.name}
+          </Text>
+          <ScrollView style={{ width: "85%" }}>
+            <Text >{Constants.loremIpsum}</Text>
+          </ScrollView>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
