@@ -23,14 +23,15 @@ export default class ProfileScreen extends React.Component {
   }
 
   render = async () => {
-    const userInfo = await getUser();
-    Alert.alert("User info is " + userInfo);
+    const user = await getUser();
+    const userInfo = JSON.parse(user);
+    Alert.alert("User info is " + user);
     const loremIpsum = Constants.loremIpsum;
     const { state, navigate } = this.props.navigation;
-    const uName = JSON.stringify(userInfo);
-    Alert.alert("Welcome " + uName["name"] + "!");
-    // const userPhoto = userInfo.picture;
-    // const userPhotoData = userPhoto.data;
+    const userName = userInfo["name"];
+    Alert.alert("Welcome " + userName + "!");
+    const userPhoto = userInfo["picture"];
+    const userPhotoData = userPhoto["data"];
 
     return (
       <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
@@ -49,9 +50,9 @@ export default class ProfileScreen extends React.Component {
           </TouchableHighlight>
         </View>
         <View style={styles.container} >
-          {/* <Image source={{uri: userPhotoData.url}} style={{width: 200, height: 200}} /> */}
+          {/* <Image source={{uri: JSON.stringify(userPhotoData["url"])}} style={{width: 200, height: 200}} /> */}
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {name}
+            {userName}
           </Text>
           <ScrollView style={{ width: "85%" }}>
             <Text >{Constants.loremIpsum}</Text>
