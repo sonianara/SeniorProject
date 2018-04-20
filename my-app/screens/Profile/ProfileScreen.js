@@ -22,16 +22,14 @@ export default class ProfileScreen extends React.Component {
     Alert.alert('Switch to edit mode');
   }
 
-  render() {
-    const userInfo = getUser().then(function initUser(result) {
-      return result;
-    });
-
-    Alert.alert("User info is " + JSON.stringify(userInfo));
-    // const loremIpsum = Constants.loremIpsum;
+  render = async () => {
+    const userInfo = await getUser();
+    Alert.alert("User info is " + userInfo);
+    const loremIpsum = Constants.loremIpsum;
     const { state, navigate } = this.props.navigation;
-    Alert.alert("Welcome " + userInfo.name + "!");
-    const userPhoto = userInfo.picture;
+    const uName = JSON.stringify(userInfo);
+    Alert.alert("Welcome " + uName["name"] + "!");
+    // const userPhoto = userInfo.picture;
     // const userPhotoData = userPhoto.data;
 
     return (
@@ -53,7 +51,7 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.container} >
           {/* <Image source={{uri: userPhotoData.url}} style={{width: 200, height: 200}} /> */}
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {userInfo.name}
+            {name}
           </Text>
           <ScrollView style={{ width: "85%" }}>
             <Text >{Constants.loremIpsum}</Text>
