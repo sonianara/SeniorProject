@@ -15,7 +15,8 @@ export default class EditSettingsComponent extends Component {
       userName: "New User",
       category: state.params.pageHeader,
       inputText: state.params.fieldValue,
-      promptVisible: false };
+      promptVisible: false
+    };
   }
 
   componentWillMount = async () => {
@@ -24,18 +25,17 @@ export default class EditSettingsComponent extends Component {
     this.setState({
       userID: userInfo.id,
       userName: userInfo.name,
-     }
+    }
     );
   }
 
   handleEdit = (newValue) => {
-    Alert.alert("Editing value for user " + this.state.userName);
-    this.setState({ inputText: newValue, promptVisible: false });
+    let cat = this.state.category;
+    cat = cat.toLowerCase();
     firebase.database().ref('users/user ' + this.state.userID).update({
-      category: inputText,
-    })
-    // TODO: Update value in database
-    // TODO: Update value on previous profile settings page
+      [cat]: newValue,
+    });
+    this.setState({ inputText: newValue, promptVisible: false });
   }
 
   render() {
