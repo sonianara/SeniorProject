@@ -16,7 +16,6 @@ export async function saveUser(user) {
 export function getUser() {
   try {
     return AsyncStorage.getItem('user', (err, result) => {
-      // Alert.alert("in getUser and result is : " + result);
       result;
     });
   } catch (error) {

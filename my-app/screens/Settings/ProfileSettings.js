@@ -9,7 +9,21 @@ export default class ProfileSettingsComponent extends Component {
   constructor() {
     super();
     this.onValueChange = this.onValueChange.bind(this);
-    this.state = { switchValue: false };
+    this.state = {
+      userID: "0",
+      userName: "New User",
+      switchValue: false,
+    };
+  }
+
+  componentWillMount = async () => {
+    const user = await getUser();
+    const userInfo = JSON.parse(user);
+    this.setState({
+      userID: userInfo.id,
+      userName: userInfo.name,
+     }
+    );
   }
 
   switchToEdit = (pageHeader, field) => {

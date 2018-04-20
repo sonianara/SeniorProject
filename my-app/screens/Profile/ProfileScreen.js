@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Alert, StyleSheet, ScrollView, Text, TouchableHighlight, View, Image, AsyncStorage } from 'react-native';
 import Button from 'react-native-button';
-import defaultImage from '../../resources/defaultUser.png'
 import * as Constants from '../../resources/LoremIpsum.js';
 import editIcon from '../../resources/editIcon.png';
 import uploadIcon from '../../resources/uploadIcon.png';
@@ -12,13 +11,18 @@ import { getUser, saveUser } from '../../config/userinfo.js';
 export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {userName: "New User", userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"};
+    this.state = {
+      userID: "0",
+      userName: "New User",
+      userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"
+    };
   }
 
   componentWillMount = async () => {
     const user = await getUser();
     const userInfo = JSON.parse(user);
     this.setState({
+      userID: userInfo.id,
       userName: userInfo.name,
       userPicture: userInfo["picture"]["data"]["url"],
      }

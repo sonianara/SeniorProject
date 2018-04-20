@@ -10,13 +10,28 @@ export default class EditSettingsComponent extends Component {
   constructor(props) {
     super(props);
     const { state, navigate } = this.props.navigation;
-    this.state = { category: state.params.pageHeader, inputText: state.params.fieldValue, promptVisible: false };
+    this.state = {
+      userID: "0",
+      userName: "New User",
+      category: state.params.pageHeader,
+      inputText: state.params.fieldValue,
+      promptVisible: false };
+  }
+
+  componentWillMount = async () => {
+    const user = await getUser();
+    const userInfo = JSON.parse(user);
+    this.setState({
+      userID: userInfo.id,
+      userName: userInfo.name,
+     }
+    );
   }
 
   handleEdit = (newValue) => {
-    const userInfo = getUser();
+    Alert.alert("Editing value for user " + this.state.userName);
     this.setState({ inputText: newValue, promptVisible: false });
-    firebase.database().ref('users/user ' + userInfo.id).update({
+    firebase.database().ref('users/user ' + this.state.userID).update({
       category: inputText,
     })
     // TODO: Update value in database
