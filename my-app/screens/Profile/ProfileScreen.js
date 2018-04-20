@@ -12,6 +12,17 @@ import { getUser, saveUser } from '../../config/userinfo.js';
 export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {userName: "New User", userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"};
+  }
+
+  componentWillMount = async () => {
+    const user = await getUser();
+    const userInfo = JSON.parse(user);
+    this.setState({
+      userName: userInfo.name,
+      userPicture: userInfo["picture"]["data"]["url"],
+     }
+    );
   }
 
   uploadImage = () => {
@@ -22,17 +33,9 @@ export default class ProfileScreen extends React.Component {
     Alert.alert('Switch to edit mode');
   }
 
-  render = async () => {
-    const user = await getUser();
-    const userInfo = JSON.parse(user);
-    Alert.alert("User info is " + user);
+  render() {
     const loremIpsum = Constants.loremIpsum;
-    const { state, navigate } = this.props.navigation;
-    const userName = userInfo["name"];
-    Alert.alert("Welcome " + userName + "!");
-    const userPhoto = userInfo["picture"];
-    const userPhotoData = userPhoto["data"];
-
+    
     return (
       <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
@@ -50,12 +53,12 @@ export default class ProfileScreen extends React.Component {
           </TouchableHighlight>
         </View>
         <View style={styles.container} >
-          {/* <Image source={{uri: JSON.stringify(userPhotoData["url"])}} style={{width: 200, height: 200}} /> */}
+          <Image source={{uri: this.state.userPicture}} style={{width: 200, height: 200}} />
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {userName}
+            {this.state.userName}
           </Text>
           <ScrollView style={{ width: "85%" }}>
-            <Text >{Constants.loremIpsum}</Text>
+            <Text >{loremIpsum}</Text>
           </ScrollView>
         </View>
       </View>
