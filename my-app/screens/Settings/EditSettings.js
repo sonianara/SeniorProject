@@ -3,18 +3,39 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import Prompt from 'rn-prompt';
 import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
+import * as firebase from 'firebase';
+import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class EditSettingsComponent extends Component {
   constructor(props) {
     super(props);
     const { state, navigate } = this.props.navigation;
-    this.state = { inputText: state.params.fieldValue, promptVisible: false };
+    this.state = {
+      userID: "0",
+      userName: "New User",
+      category: state.params.pageHeader,
+      inputText: state.params.fieldValue,
+      promptVisible: false
+    };
+  }
+
+  componentWillMount = async () => {
+    const user = await getUser();
+    const userInfo = JSON.parse(user);
+    this.setState({
+      userID: userInfo.id,
+      userName: userInfo.name,
+    }
+    );
   }
 
   handleEdit = (newValue) => {
+    let cat = this.state.category;
+    cat = cat.toLowerCase();
+    firebase.database().ref('users/user ' + this.state.userID).update({
+      [cat]: newValue,
+    });
     this.setState({ inputText: newValue, promptVisible: false });
-    // TODO: Update value in database
-    // TODO: Update value on previous profile settings page
   }
 
   render() {
