@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import Button from 'react-native-button';
 import SettingsList from 'react-native-settings-list';
 import LoginScreen from '../Login/LoginScreen.js';
+import App from '../../App';
 import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class AccountSettingsComponent extends Component {
@@ -32,7 +33,7 @@ export default class AccountSettingsComponent extends Component {
   logout = () => {
     const { state, navigate } = this.props.navigation;
     // Alert.alert('Log out');
-    navigate('LoginScreen');
+    navigate('App');
   }
 
   onValueChange(value) {

@@ -25,9 +25,9 @@ export default class LoginScreen extends React.Component {
       "id": user.id,
       "name": user.name,
       "age": 21,
-      "picture": user.picture,
+      "picture": user.picture ? user.picture.url : " ",
       "birthday": user.birthday ? user.birthday : " ",
-      "hometown": user.hometown ? user.hometown : " ",
+      "hometown": user.hometown ? user.hometown.name : " ",
       "gender": user.gender ? user.gender : " ",
       "email": user.email ? user.email : " "
     });

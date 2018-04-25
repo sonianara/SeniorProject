@@ -15,9 +15,9 @@ export default class ProfileScreen extends React.Component {
       userID: "0",
       userName: "New User",
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
-      userLocation: "",
-      userAge: "",
-      userDescription: ""
+      userLocation: "Here",
+      userAge: "20",
+      userDescription: "Hardcoded Description"
     };
   }
 
@@ -27,10 +27,10 @@ export default class ProfileScreen extends React.Component {
     this.setState({
       userID: userInfo.id,
       userName: userInfo.name,
-      userPicture: userInfo["picture"]["data"]["url"],
-      userLocation: "SLO, California (hardcoded)",
-      userAge: "23 (hardcoded)",
-      userDescription: "This is a hardcoded description"
+      userPicture: userInfo.picture,
+      userLocation: userInfo.hometown,
+      userAge: userInfo.age,
+      userDescription: userInfo.description,
      }
     );
   }
