@@ -4,7 +4,7 @@ import Prompt from 'rn-prompt';
 import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
-import { getUser, saveUser } from '../../config/userinfo.js';
+import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
 
 export default class EditSettingsComponent extends Component {
   constructor(props) {
@@ -25,17 +25,17 @@ export default class EditSettingsComponent extends Component {
     this.setState({
       userID: userInfo.id,
       userName: userInfo.name,
-    }
-    );
+    });
   }
 
   handleEdit = (newValue) => {
     let cat = this.state.category;
     cat = cat.toLowerCase();
-    firebase.database().ref('users/user ' + this.state.userID).update({
-      [cat]: newValue,
-    });
+    const updatedJSON = { [cat]: newValue, };
+    firebase.database().ref('users/user ' + this.state.userID).update(updatedJSON);
+    updateUserFields(updatedJSON);
     this.setState({ inputText: newValue, promptVisible: false });
+    this.props.navigation.state.params.onNavigateBack();
   }
 
   render() {

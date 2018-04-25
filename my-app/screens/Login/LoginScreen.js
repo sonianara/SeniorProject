@@ -22,12 +22,22 @@ export default class LoginScreen extends React.Component {
 
   addUserToDatabase = (user) => {
     firebase.database().ref('users/user ' + user.id).update({
+      "id": user.id,
       "name": user.name,
       "age": 21,
+      "picture": user.picture ? user.picture.url : " ",
       "birthday": user.birthday ? user.birthday : " ",
-      "hometown": user.hometown ? user.hometown : " ",
+      "hometown": user.hometown ? user.hometown.name : " ",
       "gender": user.gender ? user.gender : " ",
       "email": user.email ? user.email : " ",
+      "description": "Enter description here"
+    });
+  }
+
+  getUserFromDatabase = async (userId) => {
+    var db = firebase.database();
+    return await db.ref('users/user ' + userId).once('value').then(function(snapshot) {
+      return snapshot.val();
     });
   }
 
@@ -46,8 +56,16 @@ export default class LoginScreen extends React.Component {
       const fields = 'name,picture.width(200).height(200),birthday,hometown,gender,email';
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
       const userInfo = await response.json();
-      saveUser(userInfo);
-      this.addUserToDatabase(userInfo);
+
+      if ((await this.userExists(userInfo)) === false) { // If the user is new, register them
+        saveUser(userInfo);
+        this.addUserToDatabase(userInfo);
+
+      } else { // If the user has already logged in, grab their info from the database
+        const dbInfo = await this.getUserFromDatabase(userInfo.id);
+        saveUser(dbInfo);
+      }
+      
       navigate('ProfileScreen', { go_back_key: state.key });
     }
   }

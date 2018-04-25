@@ -14,7 +14,10 @@ export default class ProfileScreen extends React.Component {
     this.state = {
       userID: "0",
       userName: "New User",
-      userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png"
+      userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
+      userLocation: "Here",
+      userAge: "20",
+      userDescription: "Hardcoded Description"
     };
   }
 
@@ -24,7 +27,10 @@ export default class ProfileScreen extends React.Component {
     this.setState({
       userID: userInfo.id,
       userName: userInfo.name,
-      userPicture: userInfo["picture"]["data"]["url"],
+      userPicture: userInfo.picture,
+      userLocation: userInfo.hometown,
+      userAge: userInfo.age,
+      userDescription: userInfo.description,
      }
     );
   }
@@ -38,8 +44,6 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
-    const loremIpsum = Constants.loremIpsum;
-    
     return (
       <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
@@ -59,10 +63,13 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.container} >
           <Image source={{uri: this.state.userPicture}} style={{width: 200, height: 200}} />
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {this.state.userName}
+            {this.state.userName + ", " + this.state.userAge}
+          </Text>
+          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
+            {this.state.userLocation}
           </Text>
           <ScrollView style={{ width: "85%" }}>
-            <Text >{loremIpsum}</Text>
+            <Text >{this.state.userDescription}</Text>
           </ScrollView>
         </View>
       </View>
