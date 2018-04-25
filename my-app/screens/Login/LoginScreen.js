@@ -29,7 +29,8 @@ export default class LoginScreen extends React.Component {
       "birthday": user.birthday ? user.birthday : " ",
       "hometown": user.hometown ? user.hometown.name : " ",
       "gender": user.gender ? user.gender : " ",
-      "email": user.email ? user.email : " "
+      "email": user.email ? user.email : " ",
+      "description": "Enter description here"
     });
   }
 
