@@ -62,7 +62,6 @@ export default class LoginScreen extends React.Component {
 
       } else { // If the user has already logged in, grab their info from the database
         const dbInfo = await this.getUserFromDatabase(userInfo.id);
-        Alert.alert("User from db: " + JSON.stringify(dbInfo));
         saveUser(dbInfo);
       }
       

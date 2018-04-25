@@ -36,6 +36,7 @@ export default class ProfileSettingsComponent extends Component {
     const { state, navigate } = this.props.navigation;
     navigate('EditSettings', {
       go_back_key: state.key,
+      onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
     });

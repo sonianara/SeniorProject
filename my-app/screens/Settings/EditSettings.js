@@ -35,6 +35,7 @@ export default class EditSettingsComponent extends Component {
     firebase.database().ref('users/user ' + this.state.userID).update(updatedJSON);
     updateUserFields(updatedJSON);
     this.setState({ inputText: newValue, promptVisible: false });
+    this.props.navigation.state.params.onNavigateBack();
   }
 
   render() {
