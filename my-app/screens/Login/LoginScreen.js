@@ -12,32 +12,44 @@ const APP_ID = "413413412439784";
 
 export default class LoginScreen extends React.Component {
 
-  userExists = async (user) => {
-    var db = firebase.database();
-    return await db.ref('users').child('users/user ' + user.id).once('value', function (snapshot) {
-      var exists = snapshot.val() !== null
-      return exists;
-    });
+  state = {
+    modalVisible: false,
+  };
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
   addUserToDatabase = (user) => {
-    firebase.database().ref('users/user ' + user.id).update({
+    const newUser = {
       "id": user.id,
       "name": user.name,
       "age": 21,
-      "picture": user.picture ? user.picture.url : " ",
+      "picture": user.picture ? user.picture.data.url : " ",
       "birthday": user.birthday ? user.birthday : " ",
       "hometown": user.hometown ? user.hometown.name : " ",
       "gender": user.gender ? user.gender : " ",
       "email": user.email ? user.email : " ",
       "description": "Enter description here"
-    });
+    }
+    firebase.database().ref('users/user ' + user.id).update(newUser);
+    saveUser(newUser);
   }
 
   getUserFromDatabase = async (userId) => {
     var db = firebase.database();
     return await db.ref('users/user ' + userId).once('value').then(function(snapshot) {
       return snapshot.val();
+    });
+  }
+
+  userExists = async (user) => {
+    var db = firebase.database();
+    return await db.ref('users').once('value').then(function (snapshot) {
+      if (snapshot.hasChild('user ' + user.id)) {
+        return true;
+      }
+      return false;
     });
   }
 
@@ -56,17 +68,18 @@ export default class LoginScreen extends React.Component {
       const fields = 'name,picture.width(200).height(200),birthday,hometown,gender,email';
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
       const userInfo = await response.json();
+      const newUser = true;
+      const userExists = await this.userExists(userInfo);
 
-      if ((await this.userExists(userInfo)) === false) { // If the user is new, register them
-        saveUser(userInfo);
+      if (userExists == false) {
         this.addUserToDatabase(userInfo);
-
-      } else { // If the user has already logged in, grab their info from the database
+      }
+      else {
+        newUser = false;
         const dbInfo = await this.getUserFromDatabase(userInfo.id);
         saveUser(dbInfo);
       }
-      
-      navigate('ProfileScreen', { go_back_key: state.key });
+      navigate('ProfileScreen', { go_back_key: state.key, newUser: newUser });
     }
   }
 

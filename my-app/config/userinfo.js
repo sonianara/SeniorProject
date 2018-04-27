@@ -9,6 +9,7 @@ export async function saveUser(user) {
       console.log("User was saved");
     });
   } catch (error) {
+    Alert.alert("User was not saved.")
     console.log("Error saving user data" + error);
   }
 }
@@ -32,4 +33,3 @@ export function getUser() {
     Alert.alert("Error retrieving data" + error);
   }
 }
-

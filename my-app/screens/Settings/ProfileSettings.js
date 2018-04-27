@@ -38,6 +38,7 @@ export default class ProfileSettingsComponent extends Component {
     );
   }
 
+
   switchToEdit = (pageHeader, field) => {
     const { state, navigate } = this.props.navigation;
     navigate('EditSettings', {
