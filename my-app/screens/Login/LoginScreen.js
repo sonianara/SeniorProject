@@ -65,14 +65,15 @@ export default class LoginScreen extends React.Component {
       const fields = 'name,picture.width(200).height(200),birthday,hometown,gender,email';
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
       const userInfo = await response.json();
-
+      const newUser = true;
       saveUser(userInfo);
       if ((await this.userExists(userInfo)) === true) {
+        newUser = false;
         const dbInfo = await this.getUserFromDatabase(userInfo.id);
         saveUser(dbInfo);
       }
 
-      navigate('ProfileScreen', { go_back_key: state.key });
+      navigate('ProfileScreen', { go_back_key: state.key, newUser: newUser });
     }
   }
 

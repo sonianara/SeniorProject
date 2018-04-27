@@ -28,6 +28,14 @@ export default class ProfileScreen extends React.Component {
     };
   }
 
+  newUser = () => {
+    return this.props.navigation.state.params.newUser;
+  }
+
+  setModalVisible = (visible) => {
+    this.setState({modalVisible: visible})
+  }
+
   componentWillMount = async () => {
     const user = await getUser();
     const userInfo = JSON.parse(user);
@@ -36,10 +44,10 @@ export default class ProfileScreen extends React.Component {
       userName: userInfo.name,
       userPicture: userInfo.picture.url,
     });
-  }
 
-  setModalVisible = (visible) => {
-    this.setState({modalVisible: visible})
+    if (this.newUser() === true) {
+      this.setState({modalVisible:true});
+    }
   }
 
   handleEdit = (newValue) => {
@@ -58,19 +66,12 @@ export default class ProfileScreen extends React.Component {
     updateUserFields(newObj);
   }
 
-  userExists = async (user) => {
+  userExists = async (userID) => {
     var db = firebase.database();
-    return await db.ref('users').child('users/user ' + user.id).once('value', function (snapshot) {
+    return await db.ref('users').child('users/user ' + userID).once('value', function (snapshot) {
       var exists = snapshot.val() !== null
       return exists;
     });
-  }
-
-  newUser = async () => {
-    const user = await getUser();
-    if (!this.userExists(user)) {
-      return true;    //new user
-    }
   }
 
   uploadImage = () => {
@@ -82,11 +83,6 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
-    if (this.newUser() === true) {
-      Alert.alert("in hereeee")
-      this.state.modalVisible = true;
-      //this.setModalVisible(this.state.modalVisible);
-    }
     const loremIpsum = Constants.loremIpsum;
 
     return (
