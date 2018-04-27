@@ -12,6 +12,14 @@ const APP_ID = "413413412439784";
 
 export default class LoginScreen extends React.Component {
 
+  state = {
+    modalVisible: false,
+  };
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   userExists = async (user) => {
     var db = firebase.database();
     return await db.ref('users').child('users/user ' + user.id).once('value', function (snapshot) {
@@ -21,6 +29,7 @@ export default class LoginScreen extends React.Component {
   }
 
   addUserToDatabase = (user) => {
+    Alert.alert("adding user to db")
     firebase.database().ref('users/user ' + user.id).update({
       "id": user.id,
       "name": user.name,
@@ -57,15 +66,12 @@ export default class LoginScreen extends React.Component {
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=${fields}`);
       const userInfo = await response.json();
 
-      if ((await this.userExists(userInfo)) === false) { // If the user is new, register them
-        saveUser(userInfo);
-        this.addUserToDatabase(userInfo);
-
-      } else { // If the user has already logged in, grab their info from the database
+      saveUser(userInfo);
+      if ((await this.userExists(userInfo)) === true) {
         const dbInfo = await this.getUserFromDatabase(userInfo.id);
         saveUser(dbInfo);
       }
-      
+
       navigate('ProfileScreen', { go_back_key: state.key });
     }
   }

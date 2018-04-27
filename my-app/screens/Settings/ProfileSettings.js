@@ -22,22 +22,6 @@ export default class ProfileSettingsComponent extends Component {
     };
   }
 
-  componentWillMount = async () => {
-    const user = await getUser();
-    const userInfo = JSON.parse(user);
-    this.setState({
-      userID: userInfo.id,
-      userName: userInfo.name,
-      userBirthday: userInfo.birthday,
-      userHometown: userInfo.hometown,
-      userGender: userInfo.gender,
-      userInterestedAge: userInfo["interested age"],
-      userInterestedGender: userInfo["interested gender"],
-      userInterestedDistance: userInfo["interested distance"],
-    }
-    );
-  }
-
   switchToEdit = (pageHeader, field) => {
     const { state, navigate } = this.props.navigation;
     navigate('EditSettings', {
