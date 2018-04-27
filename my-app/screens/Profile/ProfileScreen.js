@@ -20,11 +20,13 @@ export default class ProfileScreen extends React.Component {
       birthday: "",
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
       birthday: "",
-      hometown: "",
+      userLocation: "",
       gender: "",
+      userAge: "",
       interestedGender: "",
       interestedAge: "",
-      interestedDistance: ""
+      interestedDistance: "",
+      userDescription: "",
     };
   }
 
@@ -42,11 +44,17 @@ export default class ProfileScreen extends React.Component {
     this.setState({
       userID: userInfo.id,
       userName: userInfo.name,
-      userPicture: userInfo.picture.url,
+      userPicture: userInfo.picture,
+      userLocation: userInfo.hometown,
+      userAge: userInfo.age,
+      userDescription: userInfo.description,
     });
 
-    if (this.newUser() === true) {
+    if (this.newUser() == true) {
+      this.setModalVisible(true);
       this.setState({modalVisible:true});
+    } else {
+      this.setState({modalVisible:false});
     }
   }
 
@@ -55,11 +63,12 @@ export default class ProfileScreen extends React.Component {
       id: this.state.userID,
       name: this.state.userName,
       birthday: this.state.birthday,
-      hometown: this.state.hometown,
+      hometown: this.state.userLocation,
       gender: this.state.gender,
-      interestedAge: this.state.interestedAge,
-      interestedGender: this.state.interestedGender,
-      interestedDistance: this.state.interestedDistance,
+      "interested age": this.state.interestedAge,
+      "interested gender": this.state.interestedGender,
+      "interested distance": this.state.interestedDistance,
+      description: this.state.userDescription,
     };
 
     firebase.database().ref('users/user ' + this.state.userID).update(newObj);
@@ -83,8 +92,6 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
-    const loremIpsum = Constants.loremIpsum;
-
     return (
       <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
@@ -115,12 +122,12 @@ export default class ProfileScreen extends React.Component {
                 <TextField
                   style={{height: 40}}
                   label="Birthday"
-                  onChangeText={(text) => this.setState({ birthday: text })}
+                  onChangeText={(text) => this.setState({birthday: text })}
                 />
                 <TextField
                   style={{height: 40}}
                   label="Hometown"
-                  onChangeText={(text) => this.setState({hometown: text})}
+                  onChangeText={(text) => this.setState({userLocation: text})}
                 />
                 <TextField
                   style={{height: 40}}
@@ -145,7 +152,7 @@ export default class ProfileScreen extends React.Component {
                 <TextField
                   style={{height: 40}}
                   label="Bio (Optional)"
-                  onChangeText={(text) => this.setState({interestedDistance: text})}
+                  onChangeText={(text) => this.setState({userDescription: text})}
                 />
               </View>
               <TouchableHighlight
@@ -160,10 +167,13 @@ export default class ProfileScreen extends React.Component {
         {/*<----------------- END MODAL --------------->*/}
           <Image source={{uri: this.state.userPicture}} style={{width: 200, height: 200}} />
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {this.state.userName}
+            {this.state.userName + ", " + this.state.userAge}
+          </Text>
+          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
+            {this.state.userLocation}
           </Text>
           <ScrollView style={{ width: "85%" }}>
-            <Text >{loremIpsum}</Text>
+            <Text >{this.state.userDescription}</Text>
           </ScrollView>
         </View>
       </View>
