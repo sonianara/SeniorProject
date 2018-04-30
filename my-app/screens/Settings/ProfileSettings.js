@@ -50,13 +50,13 @@ export default class ProfileSettingsComponent extends Component {
   }
 
   render() {
-    var bgColor = '#DCE3F4';
+    var bgColor = '#fff';
     return (
-      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
+      <View style={{ backgroundColor: bgColor, flex: 1 }}>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
           <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>Profile Settings</Text>
         </View>
-        <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
+        <View style={{ backgroundColor: bgColor, flex: 1 }}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
             <SettingsList.Item titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
