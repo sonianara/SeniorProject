@@ -30,6 +30,7 @@
     "react-native-material-bottom-navigation": "^0.8.1",
     "react-native-material-textfield": "^0.12.0",
     "react-native-settings-list": "^1.8.0",
+    "react-native-swipe-cards": "^0.1.1",
     "react-native-tab-navigator": "^0.3.4",
     "react-navigation": "^1.5.2",
     "rn-prompt": "^1.0.2",

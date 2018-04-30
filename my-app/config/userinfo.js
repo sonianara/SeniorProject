@@ -52,7 +52,7 @@ export function getUser() {
 
 export function getMatch() {
   try {
-    return AsyncStorage.getItem('match', (err, result) => {
+    return AsyncStorage.getItem('user', (err, result) => {
       result;
     });
   } catch (error) {
