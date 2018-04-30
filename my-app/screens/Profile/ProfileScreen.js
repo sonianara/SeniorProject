@@ -165,7 +165,7 @@ export default class ProfileScreen extends React.Component {
             </View>
           </Modal>
         {/*<----------------- END MODAL --------------->*/}
-          <Image source={{uri: this.state.userPicture}} style={{width: 200, height: 200}} />
+          <Image source={{uri: this.state.userPicture}} style={styles.profilePicture} />
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
             {this.state.userName + ", " + this.state.userAge}
           </Text>
@@ -198,5 +198,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  profilePicture: {
+    width: 300,
+    height: 300,
+    marginTop:20,
   },
 });

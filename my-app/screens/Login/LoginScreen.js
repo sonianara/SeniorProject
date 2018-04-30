@@ -86,7 +86,7 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{ width: "80%", height: "10%" }} source={appLogo} />
+        <Image style={{ width: "80%", height: "18%" }} source={appLogo} />
         <TouchableHighlight onPress={this.logIn.bind(this)}>
           <Image source={facebookLogo} resizeMode={"center"} />
         </TouchableHighlight>
@@ -98,7 +98,7 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#4183D7',
     alignItems: 'center',
     justifyContent: 'center',
   },
