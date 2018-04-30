@@ -21,7 +21,6 @@ export default class ProfileCard extends React.Component {
   getUsersFromDatabase = async () => {
     var db = firebase.database();
     return await db.ref('users/').once('value').then(function(snapshot) {
-      // Alert.alert("" + JSON.stringify(snapshot.val()));
       return snapshot.val();
     });
   }
@@ -32,7 +31,8 @@ export default class ProfileCard extends React.Component {
     for (let val in jsonObj) {
       arr.push(jsonObj[val]);
     }
-    Alert.alert("First entry in arr of cards is " + arr[0]);
+    Alert.alert("First entry in arr of cards is " + JSON.stringify(arr[0]));
+    // arr = JSON.stringify(arr);
     this.setState({ cards: arr, })
   }
 
