@@ -50,22 +50,14 @@ export default class Card extends React.Component {
         {/* <Image style={styles.thumbnail} source={{ uri: this.props.image }} />
         <Text style={styles.text}>This is card {this.props.name}</Text>
       </View> */}
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
-            Explore
-        </Text>
-        </View>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#fff', flexDirection: "row", alignSelf: "flex-end" }}>
-          <TouchableHighlight onPress={this.newMessage.bind(this)} >
-            <Icon name="chat" size={35} />
-          </TouchableHighlight>
         </View>
         <View style={styles.container}>
           <Image source={{ uri: this.state.matchPicture }} style={styles.profilePicture} />
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
+          <Text style={styles.textStyle}>
             {this.state.matchName + ", " + this.state.matchAge}
           </Text>
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
+          <Text style={styles.textStyle} >
             {this.state.matchLocation}
           </Text>
           <ScrollView style={{ width: "85%" }}>
@@ -78,14 +70,25 @@ export default class Card extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  textStyle: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 22,
+    alignItems: 'center',
+  },
   card: {
     alignItems: 'center',
+    marginTop: 50,
+    marginBottom: 10,
     borderRadius: 5,
     overflow: 'hidden',
     borderColor: 'grey',
     backgroundColor: 'white',
     borderWidth: 1,
     elevation: 1,
+    flex: 1,
+    justifyContent: 'center',
   },
   thumbnail: {
     width: 300,
