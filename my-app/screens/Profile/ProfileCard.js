@@ -6,6 +6,7 @@ import SwipeCards from 'react-native-swipe-cards';
 import * as firebase from 'firebase';
 import Card from './Card.js';
 import NoMoreCards from './NoMoreCards.js';
+import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 
 
 export default class ProfileCard extends React.Component {
@@ -20,15 +21,19 @@ export default class ProfileCard extends React.Component {
   getUsersFromDatabase = async () => {
     var db = firebase.database();
     return await db.ref('users/').once('value').then(function(snapshot) {
-      Alert.alert("" + JSON.stringify(snapshot.val()));
+      // Alert.alert("" + JSON.stringify(snapshot.val()));
       return snapshot.val();
     });
   }
 
-  componentWillMount() {
-    this.setState({
-      cards: this.getUsersFromDatabase(),
-    })
+  componentWillMount = async () => {
+    let arr = [];
+    let jsonObj = await this.getUsersFromDatabase();
+    for (let val in jsonObj) {
+      arr.push(jsonObj[val]);
+    }
+    Alert.alert("First entry in arr of cards is " + arr[0]);
+    this.setState({ cards: arr, })
   }
 
   handleYup (card) {
@@ -49,12 +54,6 @@ export default class ProfileCard extends React.Component {
 
       if (!this.state.outOfCards) {
         Alert.alert("Out of matches");
-
-        /*
-        this.setState({
-          cards: this.state.cards.concat(cards2),
-          outOfCards: true
-        })*/
       }
     }
   }

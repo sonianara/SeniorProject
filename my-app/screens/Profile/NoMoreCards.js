@@ -12,7 +12,7 @@ export default class NoMoreCards extends React.Component {
   render() {
     return (
       <View style={styles.noMoreCards}>
-        <Text>No more cards</Text>
+        <Text>No more matches</Text>
       </View>
     )
   }
