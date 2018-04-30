@@ -19,7 +19,6 @@ export default class ProfileScreen extends React.Component {
       userName: "New User",
       birthday: "",
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
-      birthday: "",
       userLocation: "",
       gender: "",
       userAge: "",
