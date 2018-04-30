@@ -5,6 +5,7 @@ import defaultImage from '../../resources/defaultUser.png'
 import * as Constants from '../../resources/LoremIpsum.js';
 import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import ProfileCard from './ProfileCard.js';
 
 export default class ExploreScreen extends React.Component {
    constructor(props) {
@@ -20,6 +21,8 @@ export default class ExploreScreen extends React.Component {
 
       return (
         <View style={{backgroundColor:'#EFEFF4', flex:1}}>
+          <ProfileCard style={{flex: 1}} />
+          {/*
             <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
 	            <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>
                  Explore
@@ -38,7 +41,7 @@ export default class ExploreScreen extends React.Component {
                <ScrollView style={{width: "85%"}}>
                   <Text >{loremIpsum}</Text>
                </ScrollView>
-            </View>
+            </View> */}
          </View>
       );
    }
