@@ -40,7 +40,6 @@ export default class EditSettingsComponent extends Component {
 
   render() {
     var bgColor = '#DCE3F4';
-
     const { state, navigate } = this.props.navigation;
     const pageHeader = state.params.pageHeader;
     const field = state.params.fieldValue;

@@ -31,17 +31,25 @@ export default class ProfileCard extends React.Component {
     for (let val in jsonObj) {
       arr.push(jsonObj[val]);
     }
-    Alert.alert("First entry in arr of cards is " + JSON.stringify(arr[0]));
     // arr = JSON.stringify(arr);
     this.setState({ cards: arr, })
   }
 
-  handleYup (card) {
-    Alert.alert("yup")
+
+  handleYup = (card) => {
+    const user = getUser().then((user) => {
+      const userInfo = JSON.parse(user);
+      const updatedJSON = { ["user " + card.id]: "yes",};
+      firebase.database().ref('matches/user ' + userInfo.id).update(updatedJSON);
+    });
   }
 
-  handleNope (card) {
-    Alert.alert("nope")
+  handleNope = (card) => {
+    const user = getUser().then((user) => {
+      const userInfo = JSON.parse(user);
+      const updatedJSON = { ["user " + card.id]: "no",};
+      firebase.database().ref('matches/user ' + userInfo.id).update(updatedJSON);
+    });
   }
 
   cardRemoved (index) {
