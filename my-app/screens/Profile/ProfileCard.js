@@ -18,30 +18,54 @@ export default class ProfileCard extends React.Component {
     }
   }
 
-  getUsersFromDatabase = async () => {
+  getUsersFromDatabase = async (user) => {
+    const userInfo = JSON.parse(user)
     var db = firebase.database();
-    return await db.ref('users/').once('value').then(function(snapshot) {
-      return snapshot.val();
+    return await db.ref('users/').orderByChild("interested age")
+      .equalTo(userInfo["interested age"])
+      .once('value')
+      .then(function(snapshot) {
+        console.log(snapshot.val());
+        return snapshot.val();
     });
   }
 
   componentWillMount = async () => {
     let arr = [];
-    let jsonObj = await this.getUsersFromDatabase();
-    for (let val in jsonObj) {
-      arr.push(jsonObj[val]);
-    }
-    Alert.alert("First entry in arr of cards is " + JSON.stringify(arr[0]));
-    // arr = JSON.stringify(arr);
-    this.setState({ cards: arr, })
+    const user = getUser().then((user) => {
+      this.getUsersFromDatabase(user).then((jsonObj) => {
+        for (let val in jsonObj) {
+          arr.push(jsonObj[val]);
+        }
+        this.setState({ cards: arr, })
+      });
+    })
   }
 
-  handleYup (card) {
-    Alert.alert("yup")
+  handleYup = (card) => {
+    const user = getUser().then((user) => {
+      const userInfo = JSON.parse(user);
+      const updatedJSON = { ["user " + card.id]: "yes",};
+      firebase.database().ref('matches/user ' + userInfo.id).update(updatedJSON);
+
+      //check if it was a match
+      const rootRef = firebase.database().ref();
+      const childRef = rootRef.child('matches/user ' + card.id+'/user ' + userInfo.id);
+      childRef.once('value', function (snapshot) {
+        console.log("here: " + snapshot.val());
+        if (snapshot.val() === "yes") {
+          Alert.alert("Match!")
+        }
+      });
+    });
   }
 
-  handleNope (card) {
-    Alert.alert("nope")
+  handleNope = (card) => {
+    const user = getUser().then((user) => {
+      const userInfo = JSON.parse(user);
+      const updatedJSON = { ["user " + card.id]: "no",};
+      firebase.database().ref('matches/user ' + userInfo.id).update(updatedJSON);
+    });
   }
 
   cardRemoved (index) {
@@ -53,7 +77,6 @@ export default class ProfileCard extends React.Component {
       console.log(`There are only ${this.state.cards.length - index - 1} cards left.`);
 
       if (!this.state.outOfCards) {
-        Alert.alert("Out of matches");
       }
     }
   }
