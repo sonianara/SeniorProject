@@ -35,12 +35,21 @@ export default class ProfileCard extends React.Component {
     this.setState({ cards: arr, })
   }
 
-
   handleYup = (card) => {
     const user = getUser().then((user) => {
       const userInfo = JSON.parse(user);
       const updatedJSON = { ["user " + card.id]: "yes",};
       firebase.database().ref('matches/user ' + userInfo.id).update(updatedJSON);
+
+      //check if it was a match
+      const rootRef = firebase.database().ref();
+      const childRef = rootRef.child('matches/user ' + card.id+'/user ' + userInfo.id);
+      childRef.once('value', function (snapshot) {
+        console.log("here: " + snapshot.val());
+        if (snapshot.val() === "yes") {
+          Alert.alert("Match!")
+        }
+      });
     });
   }
 
@@ -61,7 +70,6 @@ export default class ProfileCard extends React.Component {
       console.log(`There are only ${this.state.cards.length - index - 1} cards left.`);
 
       if (!this.state.outOfCards) {
-        Alert.alert("Out of matches");
       }
     }
   }
