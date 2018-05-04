@@ -18,21 +18,28 @@ export default class ProfileCard extends React.Component {
     }
   }
 
-  getUsersFromDatabase = async () => {
+  getUsersFromDatabase = async (user) => {
+    const userInfo = JSON.parse(user)
     var db = firebase.database();
-    return await db.ref('users/').once('value').then(function(snapshot) {
-      return snapshot.val();
+    return await db.ref('users/').orderByChild("interested age")
+      .equalTo(userInfo["interested age"])
+      .once('value')
+      .then(function(snapshot) {
+        console.log(snapshot.val());
+        return snapshot.val();
     });
   }
 
   componentWillMount = async () => {
     let arr = [];
-    let jsonObj = await this.getUsersFromDatabase();
-    for (let val in jsonObj) {
-      arr.push(jsonObj[val]);
-    }
-    // arr = JSON.stringify(arr);
-    this.setState({ cards: arr, })
+    const user = getUser().then((user) => {
+      this.getUsersFromDatabase(user).then((jsonObj) => {
+        for (let val in jsonObj) {
+          arr.push(jsonObj[val]);
+        }
+        this.setState({ cards: arr, })
+      });
+    })
   }
 
   handleYup = (card) => {
