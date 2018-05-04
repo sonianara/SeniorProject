@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert, Button} from 'react-native';
+import { StyleSheet, Text, View, Alert, Button, FlatList} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import MessageStream from './MessageStream.js';
 import config from '../../App.js';
 import * as firebase from 'firebase';
+import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
 export default class MessageScreen extends Component {
@@ -12,6 +13,23 @@ export default class MessageScreen extends Component {
       super();
       this.onValueChange = this.onValueChange.bind(this);
       this.state = {switchValue: false};
+   }
+
+   getMatchesFromDatabase = () => {
+     const user = getUser().then((user) => {
+       const userInfo = JSON.parse(user)
+       var db = firebase.database();
+       return db.ref('matches/user ' + userInfo["id"])
+         .once('value')
+         .then(function(snapshot) {
+           arr = [];
+           for (var key in snapshot.val()) {
+             arr.push({"key":key});
+           }
+           console.log(arr);
+           return arr;
+       });
+     });
    }
 
    render() {
