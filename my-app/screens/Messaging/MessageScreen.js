@@ -12,7 +12,16 @@ export default class MessageScreen extends Component {
    constructor() {
       super();
       this.onValueChange = this.onValueChange.bind(this);
-      this.state = {switchValue: false};
+      this.state = {
+        switchValue: false,
+        matches: [],
+      };
+   }
+
+   keyExtractor = (item, index) => index;
+
+   componentDidMount() {
+     this.getMatchesFromDatabase();
    }
 
    getMatchesFromDatabase = () => {
@@ -21,15 +30,14 @@ export default class MessageScreen extends Component {
        var db = firebase.database();
        return db.ref('matches/user ' + userInfo["id"])
          .once('value')
-         .then(function(snapshot) {
+         .then((snapshot) => {
            arr = [];
-           for (var key in snapshot.val()) {
-             arr.push({"key":key});
+           for (var val in snapshot.val()) {
+             arr.push({["key"]:val});
            }
-           console.log(arr);
-           return arr;
-       });
-     });
+           this.setState({matches:arr});
+         });
+      });
    }
 
    render() {
@@ -43,6 +51,12 @@ export default class MessageScreen extends Component {
 	             <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>Messages</Text>
 	          </View>
             <View>
+            <FlatList
+              data={this.state.matches}
+              renderItem={({item}) => <Text>{item.key}</Text>}
+            />
+
+            {/*
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
 	              <SettingsList.Item hasNavArrow={true} title='Jane Doe'
@@ -57,7 +71,7 @@ export default class MessageScreen extends Component {
                 <SettingsList.Item hasNavArrow={true} title='Rebecca Black'
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			             onPress={() => navigate('MessageStream', { go_back_key: state.key })}/>
-              </SettingsList>
+              </SettingsList>*/}
               <Button
                 onPress={() => updateDB(1, 2, "Message 10")}
                 title="Add Message"
@@ -78,3 +92,15 @@ function updateDB(userID, fieldValue1, fieldValue2) {
      field2: fieldValue2,
    });
  }
+
+const styles = StyleSheet.create({
+ container: {
+  flex: 1,
+  paddingTop: 22
+ },
+ item: {
+   padding: 10,
+   fontSize: 18,
+   height: 44,
+ },
+})
