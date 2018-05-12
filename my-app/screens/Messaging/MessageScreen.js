@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, Alert, Button, FlatList, List, ScrollView} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import MessageStream from './MessageStream.js';
 import config from '../../App.js';
@@ -33,12 +33,27 @@ export default class MessageScreen extends Component {
          .then((snapshot) => {
            arr = [];
            for (var val in snapshot.val()) {
-             arr.push({["key"]:val});
+             if (snapshot.val()[val] === "yes") {
+               arr.push({["key"]:val});
+             }
            }
            this.setState({matches:arr});
          });
       });
    }
+
+   renderItem({ item, index }) {
+    return <View style={{
+    flex: 1,
+    margin: 5,
+    minWidth: 170,
+    maxWidth: 223,
+    height: 304,
+    maxHeight:304,
+    backgroundColor: '#CCC',
+    }}/>
+    }
+
 
    render() {
 
@@ -54,6 +69,7 @@ export default class MessageScreen extends Component {
             <FlatList
               data={this.state.matches}
               renderItem={({item}) => <Text>{item.key}</Text>}
+              horizontal={true}
             />
 
             {/*
@@ -72,10 +88,6 @@ export default class MessageScreen extends Component {
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			             onPress={() => navigate('MessageStream', { go_back_key: state.key })}/>
               </SettingsList>*/}
-              <Button
-                onPress={() => updateDB(1, 2, "Message 10")}
-                title="Add Message"
-              />
            </View>
         </View>
       );
@@ -86,12 +98,6 @@ export default class MessageScreen extends Component {
    }
 }
 
-function updateDB(userID, fieldValue1, fieldValue2) {
-   firebase.database().ref(userID).set({
-     field1: fieldValue1,
-     field2: fieldValue2,
-   });
- }
 
 const styles = StyleSheet.create({
  container: {
