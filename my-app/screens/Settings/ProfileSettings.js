@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
+import EditGenderComponent from '../Settings/EditGenderSettings';
 import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class ProfileSettingsComponent extends Component {
@@ -39,9 +40,29 @@ export default class ProfileSettingsComponent extends Component {
   }
 
 
-  switchToEdit = (pageHeader, field) => {
+  switchToEditText = (pageHeader, field) => {
     const { state, navigate } = this.props.navigation;
     navigate('EditSettings', {
+      go_back_key: state.key,
+      onNavigateBack: this.componentWillMount,
+      pageHeader: pageHeader,
+      fieldValue: field
+    });
+  }
+
+  switchToEditGender = (pageHeader, field) => {
+    const { state, navigate } = this.props.navigation;
+    navigate('EditGenderSettings', {
+      go_back_key: state.key,
+      onNavigateBack: this.componentWillMount,
+      pageHeader: pageHeader,
+      fieldValue: field
+    });
+  }
+
+  switchToEditPicker = (pageHeader, field) => {
+    const { state, navigate } = this.props.navigation;
+    navigate('EditSettingsPicker', {
       go_back_key: state.key,
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
@@ -61,17 +82,17 @@ export default class ProfileSettingsComponent extends Component {
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
             <SettingsList.Item titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
             <SettingsList.Item titleInfo={this.state.userGender} hasNavArrow={true} title='Gender'
-              onPress={() => this.switchToEdit('Gender', this.state.userGender)} />
+              onPress={() => this.switchToEditGender('Gender', this.state.userGender)} />
             <SettingsList.Item titleInfo={this.state.userInterestedGender} hasNavArrow={true} title='Interested In (Gender)'
-              onPress={() => this.switchToEdit('Interested Gender', this.state.userInterestedGender)} />
+              onPress={() => this.switchToEditGender('Interested Gender', this.state.userInterestedGender)} />
             <SettingsList.Item titleInfo={this.state.userInterestedAge} hasNavArrow={true} title='Interested In (Age)'
-              onPress={() => this.switchToEdit('Interested Age', this.state.userInterestedAge)} />
+              onPress={() => this.switchToEditPicker('Interested Age', this.state.userInterestedAge)} />
               <SettingsList.Item titleInfo={this.state.userHometown} hasNavArrow={true} title='Hometown'
-              onPress={() => this.switchToEdit('Hometown', this.state.userHometown)} />
+              onPress={() => this.switchToEditText('Hometown', this.state.userHometown)} />
             <SettingsList.Item titleInfo={this.state.userInterestedDistance} hasNavArrow={true} title='Interested In (Distance)'
-              onPress={() => this.switchToEdit('Interested Distance', this.state.userInterestedDistance)} />
+              onPress={() => this.switchToEditPicker('Interested Distance', this.state.userInterestedDistance)} />
             <SettingsList.Item title='Filtered Words'
-              onPress={() => this.switchToEdit('Filtered Words', ' ')} />
+              onPress={() => this.switchToEditText('Filtered Words', ' ')} />
           </SettingsList>
         </View>
       </View>
