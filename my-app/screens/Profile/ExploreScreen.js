@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Alert, StyleSheet, ScrollView, Text, TouchableHighlight, View, Image } from 'react-native';
 import Button from 'react-native-button';
 import defaultImage from '../../resources/defaultUser.png'
-import * as Constants from '../../resources/LoremIpsum.js';
 import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ProfileCard from './ProfileCard.js';

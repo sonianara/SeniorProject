@@ -14,6 +14,11 @@ export default class MessageStream extends React.Component {
           text: 'Start Your Conversation Here',
           createdAt: new Date(),
           renderAvatar:null,
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://placeimg.com/140/140/any',
+          },
         },
       ],
     })
