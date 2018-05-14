@@ -73,9 +73,9 @@ export default class EditGenderComponent extends Component {
                     </SettingsList>
                 </View>
                 {this.state.promptVisible ? <Picker
-                        closeModal={() => this.handleEdit(genders[this.state.genderIndex].gender)}
-                        offSet={this.state.offSet} changeGender={this.changeGender}
-                        selectedGender={this.state.gender} /> : null}
+                    closeModal={() => this.handleEdit(genders[this.state.genderIndex].gender)}
+                    offSet={this.state.offSet} changeGender={this.changeGender}
+                    selectedGender={this.state.gender} /> : null}
             </View>
         );
     }
