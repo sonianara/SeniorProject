@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
 import Card from './Card.js';
 import NoMoreCards from './NoMoreCards.js';
 import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
+import DatabaseConnections from '../../backend/DatabaseConnections.js';
+
 
 
 export default class ProfileCard extends React.Component {
@@ -16,24 +18,13 @@ export default class ProfileCard extends React.Component {
       cards: this.props.cards,
       outOfCards: false
     }
-  }
-
-  getUsersFromDatabase = async (user) => {
-    const userInfo = JSON.parse(user)
-    var db = firebase.database();
-    return await db.ref('users/').orderByChild("interested age")
-      .equalTo(userInfo["interested age"])
-      .once('value')
-      .then(function(snapshot) {
-        console.log(snapshot.val());
-        return snapshot.val();
-    });
+    this.db = new DatabaseConnections();
   }
 
   componentWillMount = async () => {
     let arr = [];
     const user = getUser().then((user) => {
-      this.getUsersFromDatabase(user).then((jsonObj) => {
+      this.db.getUsersFromDatabase(user).then((jsonObj) => {
         for (let val in jsonObj) {
           arr.push(jsonObj[val]);
         }
