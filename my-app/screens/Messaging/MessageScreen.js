@@ -68,8 +68,6 @@ export default class MessageScreen extends Component {
    );
 
    render() {
-      var bgColor = '#DCE3F4';
-
       return (
          <View style={styles.container}>
             <View style={styles.header}>
