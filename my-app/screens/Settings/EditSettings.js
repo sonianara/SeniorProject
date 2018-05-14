@@ -45,27 +45,50 @@ export default class EditSettingsComponent extends Component {
     const field = state.params.fieldValue;
 
     return (
-      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
-            Edit {pageHeader}
-          </Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Edit {pageHeader}</Text>
         </View>
-        <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
+        <View style={styles.settingsList}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
-            <SettingsList.Item titleInfo={this.state.inputText} hasNavArrow={false} title={pageHeader}
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputText} hasNavArrow={false} title={pageHeader}
               onPress={() => this.setState({ promptVisible: true })} />
           </SettingsList>
         </View>
         <Prompt
-          title={"Enter New Value for " + pageHeader + ":"}
-          placeholder={field}
-          defaultValue={field}
-          visible={this.state.promptVisible}
+          title={"Enter New Value for " + pageHeader + ":"} placeholder={field}
+          defaultValue={field} visible={this.state.promptVisible}
           onCancel={() => this.setState({ promptVisible: false })}
           onSubmit={(value) => this.handleEdit(value)} />
       </View>
     );
   }
 }
+
+var styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ded3f6',
+    flex: 1,
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor: '#c8c7cc',
+  },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir',
+    fontSize: 18,
+  },
+  settingsList: {
+    backgroundColor: '#ded3f6',
+    flex: 1,
+  },
+  itemTextStyle: {
+    color: '#5228b8',
+  },
+});

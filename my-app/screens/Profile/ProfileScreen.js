@@ -34,7 +34,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   setModalVisible = (visible) => {
-    this.setState({modalVisible: visible})
+    this.setState({ modalVisible: visible })
   }
 
   componentWillMount = async () => {
@@ -51,9 +51,9 @@ export default class ProfileScreen extends React.Component {
 
     if (this.newUser() == true) {
       this.setModalVisible(true);
-      this.setState({modalVisible:true});
+      this.setState({ modalVisible: true });
     } else {
-      this.setState({modalVisible:false});
+      this.setState({ modalVisible: false });
     }
   }
 
@@ -92,66 +92,65 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
-            My Profile
-              </Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>My Profile</Text>
         </View>
         <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
           <TouchableHighlight onPress={this.uploadImage.bind(this)}>
             <Icon name="upload" type="material-community" size={35} />
           </TouchableHighlight>
-          <Text>   </Text>
           <TouchableHighlight onPress={this.editPage.bind(this)} >
             <Icon name="edit" type="entypo" size={35} />
           </TouchableHighlight>
         </View>
-        <View style={styles.container}>
-        {/*---------------------- MODAL ---------------------->*/}
-        <Modal
+        <View style={styles.modal}>
+          {/*---------------------- MODAL ---------------------->*/}
+          <Modal
             animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => { alert("Modal has been closed");}}>
-            <View style={{marginTop: 100, marginLeft: 20,
-              flex: 1,}}>
+            onRequestClose={() => { alert("Modal has been closed"); }}>
+            <View style={{
+              marginTop: 100, marginLeft: 20,
+              flex: 1,
+            }}>
               <Text style={styles.titleText}>New User Registration</Text>
               <View>
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Birthday"
-                  onChangeText={(text) => this.setState({birthday: text })}
+                  onChangeText={(text) => this.setState({ birthday: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Hometown"
-                  onChangeText={(text) => this.setState({userLocation: text})}
+                  onChangeText={(text) => this.setState({ userLocation: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Gender"
-                  onChangeText={(text) => this.setState({gender: text})}
+                  onChangeText={(text) => this.setState({ gender: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Interested Age"
-                  onChangeText={(text) => this.setState({interestedAge: text})}
+                  onChangeText={(text) => this.setState({ interestedAge: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Interested Gender"
-                  onChangeText={(text) => this.setState({interestedGender: text})}
+                  onChangeText={(text) => this.setState({ interestedGender: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Interested Distance"
-                  onChangeText={(text) => this.setState({interestedDistance: text})}
+                  onChangeText={(text) => this.setState({ interestedDistance: text })}
                 />
                 <TextField
-                  style={{height: 40}}
+                  style={{ height: 40 }}
                   label="Bio (Optional)"
-                  onChangeText={(text) => this.setState({userDescription: text})}
+                  onChangeText={(text) => this.setState({ userDescription: text })}
                 />
               </View>
               <TouchableHighlight
@@ -160,11 +159,11 @@ export default class ProfileScreen extends React.Component {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
                 <Text style={styles.submitButton}>Submit</Text>
-                </TouchableHighlight>
+              </TouchableHighlight>
             </View>
           </Modal>
-        {/*<----------------- END MODAL --------------->*/}
-          <Image source={{uri: this.state.userPicture}} style={styles.profilePicture} />
+          {/*<----------------- END MODAL --------------->*/}
+          <Image source={{ uri: this.state.userPicture }} style={styles.profilePicture} />
           <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
             {this.state.userName + ", " + this.state.userAge}
           </Text>
@@ -183,17 +182,34 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ded3f6',
+  },
+  modal: {
+    flex: 1,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor: '#c8c7cc'
   },
   titleText: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 50,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  },
   submitButton: {
-    marginTop:20,
+    marginTop: 20,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -201,6 +217,6 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 300,
     height: 300,
-    marginTop:20,
+    marginTop: 20,
   },
 });

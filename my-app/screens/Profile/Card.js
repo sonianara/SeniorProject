@@ -33,11 +33,6 @@ export default class Card extends React.Component {
   render() {
     return (
       <View style={styles.card}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
-            Explore
-        </Text>
-        </View>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#fff', flexDirection: "row", alignSelf: "flex-end" }}>
         </View>
         <View style={styles.container}>
@@ -58,6 +53,10 @@ export default class Card extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   textStyle: {
     marginLeft: 10,
     marginTop: 10,
@@ -67,13 +66,13 @@ const styles = StyleSheet.create({
   },
   card: {
     alignItems: 'center',
-    marginTop: 50,
+    width: '100%',
+    marginTop: 10,
     marginBottom: 10,
     borderRadius: 5,
     overflow: 'hidden',
-    borderColor: 'grey',
     backgroundColor: 'white',
-    borderWidth: 1,
+    borderWidth: 0,
     elevation: 1,
     flex: 1,
     justifyContent: 'center',

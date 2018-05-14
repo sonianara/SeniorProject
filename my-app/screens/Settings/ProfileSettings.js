@@ -79,18 +79,18 @@ export default class ProfileSettingsComponent extends Component {
         <View style={styles.container}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
-            <SettingsList.Item titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
-            <SettingsList.Item titleInfo={this.state.userHometown} hasNavArrow={true} title='Hometown'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userHometown} hasNavArrow={true} title='Hometown'
               onPress={() => this.switchToEditText('Hometown', this.state.userHometown)} />
-            <SettingsList.Item titleInfo={this.state.userGender} hasNavArrow={true} title='Gender'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userGender} hasNavArrow={true} title='Gender'
               onPress={() => this.switchToEditGender('Gender', this.state.userGender)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedGender} hasNavArrow={true} title='Interested In (Gender)'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedGender} hasNavArrow={true} title='Interested In (Gender)'
               onPress={() => this.switchToEditGender('Interested Gender', this.state.userInterestedGender)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedAge} hasNavArrow={true} title='Interested In (Age)'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedAge} hasNavArrow={true} title='Interested In (Age)'
               onPress={() => this.switchToEditPicker('Interested Age', this.state.userInterestedAge)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedDistance} hasNavArrow={true} title='Interested In (Distance)'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedDistance} hasNavArrow={true} title='Interested In (Distance)'
               onPress={() => this.switchToEditPicker('Interested Distance', this.state.userInterestedDistance)} />
-            <SettingsList.Item title='Filtered Words'
+            <SettingsList.Item titleStyle={styles.itemTextStyle} title='Filtered Words'
               onPress={() => this.switchToEditText('Filtered Words', ' ')} />
           </SettingsList>
         </View>
@@ -104,22 +104,23 @@ export default class ProfileSettingsComponent extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ded3f6',
     flex: 1,
   },
   header: {
     borderBottomWidth: 1,
-    backgroundColor: '#f7f7f8',
+    backgroundColor: '#C1A9F6',
     borderColor: '#c8c7cc'
+  },
+  itemTextStyle: {
+    color: '#5228b8',
   },
   headerText: {
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold',
-    fontSize: 16
+    fontFamily: 'Avenir',
+    fontSize: 18
   },
-  // settingsList: {
-  //   ,
-  // }
 });

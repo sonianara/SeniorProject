@@ -61,18 +61,18 @@ export default class EditPickerComponent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.text}>Edit {pageHeader}</Text>
+          <Text style={styles.headerText}>Edit {pageHeader}</Text>
         </View>
         <View style={styles.settingsList}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
-            <SettingsList.Item titleInfo={this.state.inputMin} hasNavArrow={false} title={"Minimum " + pageHeader} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputMin} hasNavArrow={false} title={"Minimum " + pageHeader} />
             <Slider style={styles.slider}
               step={step} minimumValue={minValue} maximumValue={maxValue}
               minimumTrackTintColor='#B899FB' maximumTrackTintColor='#2E1367'
               onSlidingComplete={this.updateValue.bind(this)}
               onValueChange={this.changeMin.bind(this)} value={Number(this.state.inputMin)} />
-            <SettingsList.Item titleInfo={this.state.inputMax} hasNavArrow={false} title={"Maximum " + pageHeader} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputMax} hasNavArrow={false} title={"Maximum " + pageHeader} />
             <Slider style={styles.slider}
               step={step} minimumValue={minValue} maximumValue={maxValue}
               minimumTrackTintColor='#B899FB' maximumTrackTintColor='#2E1367'
@@ -87,24 +87,28 @@ export default class EditPickerComponent extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#EFEFF4',
+    backgroundColor: '#ded3f6',
     flex: 1,
   },
   header: {
     borderBottomWidth: 1,
-    backgroundColor: '#f7f7f8',
+    backgroundColor: '#C1A9F6',
     borderColor: '#c8c7cc',
   },
-  text: {
+  headerText: {
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
+    fontFamily: 'Avenir',
   },
   settingsList: {
-    backgroundColor: '#EFEFF4',
+    backgroundColor: '#ded3f6',
     flex: 1,
+  },
+  itemTextStyle: {
+    color: '#5228b8',
   },
   slider: {
     backgroundColor: '#EFEFF4',
