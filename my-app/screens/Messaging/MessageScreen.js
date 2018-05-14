@@ -17,6 +17,8 @@ export default class MessageScreen extends Component {
         switchValue: false,
         matches: [],
         receiver: "",
+        userPicture: "",
+        userName: "",
       };
       this.db = new DatabaseConnections();
    }
@@ -27,24 +29,44 @@ export default class MessageScreen extends Component {
      this.getMatchesFromDatabase();
    }
 
+   getUserProfilePic = (userId) => {
+     firebase.database().ref('users/' + userId).once('value').then((snapshot) => {
+       this.setState({userPicture: snapshot.val().picture});
+       console.log(this.state.userPicture)
+     });
+   }
+
+   getUserName = (userId) => {
+     firebase.database().ref('users/' + userId).once('value').then((snapshot) => {
+       this.setState({userName: snapshot.val().name});
+       console.log(this.state.userName)
+     });
+   }
+
    getMatchesFromDatabase = () => {
      const user = getUser().then((user) => {
        const userInfo = JSON.parse(user)
-       var db = firebase.database();
-       return db.ref('matches/user ' + userInfo["id"])
+       var db = firebase.database().ref();
+       db.child('matches/user ' + userInfo["id"])
          .once('value')
          .then((snapshot) => {
+           var index = 0;
            arr = [];
            for (var val in snapshot.val()) {
+             console.log(val);
+             console.log("index: " + index);
+             var size = Object.keys(snapshot.val()).length;
              if (snapshot.val()[val] === "yes") {
-               const picId = this.db.getUserProfilePicture(val);
-               const name = this.db.getUserName(val);
-               console.log(val);
-               console.log(picId);
-               arr.push({["key"]:val, ["picId"]:picId, ["name"]:name});
+               db.child('users/' + val).once('value')
+               .then((snapshot) => {
+                 arr.push({["key"]:val, ["pic"]:snapshot.val().picture, ["name"]:snapshot.val().name});
+                 if (index === size) {
+                   this.setState({matches:arr});
+                 }
+               })
              }
+             index++;
            }
-           this.setState({matches:arr});
            console.log(arr);
          });
       });
@@ -56,15 +78,16 @@ export default class MessageScreen extends Component {
    }
 
    renderItem = ({item}) => (
-     <TouchableHighlight
-        onPress={this.onPress.bind(item)}>
-        <Text>{item.key}</Text>
+     <TouchableHighlight style={styles.imageContainer }>
+       <Image style={ styles.image } source={{ uri: item.pic}} />
      </TouchableHighlight>
    );
 
-   /*<TouchableHighlight style={styles.imageContainer }>
-     <Image style={ styles.image } source={{ uri: }} />
+   /*<TouchableHighlight
+      onPress={this.onPress.bind(item)}>
+      <Text>{item.name}</Text>
    </TouchableHighlight>*/
+
 
    render() {
       var bgColor = '#DCE3F4';
