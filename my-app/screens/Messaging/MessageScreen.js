@@ -19,6 +19,7 @@ export default class MessageScreen extends Component {
         receiver: "",
       };
       this.db = new DatabaseConnections();
+      this.onPress = this.onPress.bind(this);
    }
 
    keyExtractor = (item, index) => index;
@@ -42,7 +43,8 @@ export default class MessageScreen extends Component {
                (val !== ("user " + userInfo["id"]))) {
                db.child('users/' + val).once('value')
                .then((snapshot) => {
-                 arr.push({["key"]:val, ["pic"]:snapshot.val().picture, ["name"]:snapshot.val().name});
+                 arr.push({["key"]:snapshot.val().id, ["pic"]:snapshot.val().picture, ["name"]:snapshot.val().name});
+                 console.log("ARRAY!!!!!!!!", arr);
                  if (index === size) {
                    this.setState({matches:arr});
                  }
@@ -50,22 +52,26 @@ export default class MessageScreen extends Component {
              }
              index++;
            }
-           console.log(arr);
          });
       });
    }
 
-   onPress = (item) => {
+   onPress = (userID, userName) => {
      const { state, navigate } = this.props.navigation;
-     navigate('MessageStream')
+     navigate('MessageStream', {recieverID: userID, recieverName: userName})
    }
 
-   renderItem = ({item}) => (
-     <TouchableHighlight style={styles.imageContainer }
-       onPress={this.onPress}>
-       <Image style={ styles.image } source={{ uri: item.pic}} />
-     </TouchableHighlight>
-   );
+   renderItem = ({item}) => {
+     return (
+       <View style={styles.column}>
+         <TouchableHighlight style={styles.imageContainer }
+           onPress={() => this.onPress(item.key, item.name)}>
+           <Image style={ styles.image } source={{ uri: item.pic}} />
+         </TouchableHighlight>
+         <Text>{item.name}</Text>
+       </View>
+     )
+   };
 
    render() {
       return (
@@ -94,6 +100,8 @@ const styles = StyleSheet.create({
  container: {
   flex: 1,
   backgroundColor: '#ded3f6',
+  flexDirection: 'column',
+  alignItems: 'center',
  },
  header: {
    borderBottomWidth: 1,
@@ -122,5 +130,11 @@ const styles = StyleSheet.create({
     height:128,
     width: 128,
     borderRadius: 64
+  },
+  column:{
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingLeft: 10,
   },
 })
