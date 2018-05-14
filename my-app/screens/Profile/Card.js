@@ -37,14 +37,12 @@ export default class Card extends React.Component {
         </View>
         <View style={styles.container}>
           <Image source={{ uri: this.props.picture }} style={styles.profilePicture} />
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {this.props.name + ", " + this.props.age}
-          </Text>
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
-            {this.props.hometown}
-          </Text>
-          <ScrollView style={{ width: "85%" }}>
-            <Text >{this.props.description}</Text>
+          <Text style={styles.nameHeader}>{this.props.name + ", " + this.props.age}</Text>
+          <Text style={styles.locationHeader}>{this.props.hometown}</Text>
+          <ScrollView style={styles.scrollbox}>
+            <Text style={styles.descriptionBox}>{this.props.description}</Text>
+            <Text style={styles.locationHeader} >{'Likes: '}</Text>
+            <Text style={styles.locationHeader} >{'Dislikes: '}</Text>
           </ScrollView>
         </View>
       </View>
@@ -56,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    alignItems: 'center',
   },
   textStyle: {
     marginLeft: 10,
@@ -95,5 +94,24 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginTop: 20,
+    alignItems: 'center',
+  },
+  nameHeader: {
+    marginTop: 10,
+    fontSize: 26,
+    fontFamily: 'Avenir',
+  },
+  locationHeader: {
+    marginTop: 5,
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  },
+  scrollbox: {
+    width: "85%",
+  },
+  descriptionBox: {
+    marginTop: 10,
+    fontSize: 20,
+    fontFamily: 'Gill Sans',
   },
 })

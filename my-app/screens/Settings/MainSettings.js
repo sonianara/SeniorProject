@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Alert} from 'react-native';
 import SettingsList from 'react-native-settings-list';
-
 import AccountSettings from '../../screens/Settings/AccountSettings.js';
 import ProfileSettings from '../../screens/Settings/ProfileSettings.js';
 
@@ -12,17 +11,15 @@ export default class MainSettingsComponent extends Component {
       this.onValueChange = this.onValueChange.bind(this);
       this.state = {switchValue: false};
    }
+
    render() {
-
       const { state, navigate } = this.props.navigation;
-      var bgColor = '#DCE3F4';
-
       return (
          <View style={styles.container}>
             <View style={styles.header}>
 	             <Text style={styles.headerText}>Main Settings</Text>
 	          </View>
-	          <View>
+	          <View style={{flex: 1}}>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
 	              <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Profile Settings'

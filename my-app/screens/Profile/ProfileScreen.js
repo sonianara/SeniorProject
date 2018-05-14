@@ -100,9 +100,9 @@ export default class ProfileScreen extends React.Component {
           <TouchableHighlight onPress={this.uploadImage.bind(this)}>
             <Icon name="upload" type="material-community" size={35} />
           </TouchableHighlight>
-          <TouchableHighlight onPress={this.editPage.bind(this)} >
+          {/* <TouchableHighlight onPress={this.editPage.bind(this)} >
             <Icon name="edit" type="entypo" size={35} />
-          </TouchableHighlight>
+          </TouchableHighlight> */}
         </View>
         <View style={styles.modal}>
           {/*---------------------- MODAL ---------------------->*/}
@@ -164,14 +164,12 @@ export default class ProfileScreen extends React.Component {
           </Modal>
           {/*<----------------- END MODAL --------------->*/}
           <Image source={{ uri: this.state.userPicture }} style={styles.profilePicture} />
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {this.state.userName + ", " + this.state.userAge}
-          </Text>
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
-            {this.state.userLocation}
-          </Text>
+          <Text style={styles.nameHeader} >{this.state.userName + ", " + this.state.userAge}</Text>
+          <Text style={styles.locationHeader} >{this.state.userLocation}</Text>
           <ScrollView style={{ width: "85%" }}>
-            <Text >{this.state.userDescription}</Text>
+            <Text style={styles.descriptionBox}>{this.state.userDescription}</Text>
+            <Text style={styles.locationHeader} >{'Likes: Animals'}</Text>
+            <Text style={styles.locationHeader} >{'Dislikes: Planes'}</Text>
           </ScrollView>
         </View>
       </View>
@@ -218,5 +216,20 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginTop: 20,
+  },
+  nameHeader: {
+    marginTop: 10,
+    fontSize: 26,
+    fontFamily: 'Avenir',
+  },
+  locationHeader: {
+    marginTop: 5,
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  },
+  descriptionBox: {
+    marginTop: 10,
+    fontSize: 20,
+    fontFamily: 'Gill Sans',
   },
 });
