@@ -18,7 +18,7 @@ export default class AccountSettingsComponent extends Component {
       userEmail: "email@example.com",
       userName: "New User",
       switchValue: false,
-     };
+    };
   }
 
   componentWillMount = async () => {
@@ -47,24 +47,52 @@ export default class AccountSettingsComponent extends Component {
     var bgColor = '#DCE3F4';
 
     return (
-      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>Account Settings</Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Account Settings</Text>
         </View>
         <View>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 5 }} />
-            <SettingsList.Item titleInfo={this.state.userName} hasNavArrow={false} title='Name' />
-            <SettingsList.Item titleInfo={this.state.userEmail} hasNavArrow={false} title='Email' />
-            <View>
-              <Button onPress={this.logout.bind(this)}
-                style={{ color: "red", alignSelf: "center", marginTop: 50, fontWeight: "bold", fontSize: 16 }} >
-                Logout
-                     </Button>
-            </View>
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userName} hasNavArrow={false} title='Name' />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userEmail} hasNavArrow={false} title='Email' />
           </SettingsList>
+          <View>
+            <Button onPress={this.logout.bind(this)} style={styles.logoutButton}>Logout</Button>
+          </View>
         </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ded3f6',
+    flex: 1,
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor: '#c8c7cc'
+  },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  },
+  logoutButton: {
+    color: "red",
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 10,
+    fontWeight: "bold",
+    fontSize: 16
+  },
+  itemTextStyle: {
+    color: '#5228b8',
+  },
+});

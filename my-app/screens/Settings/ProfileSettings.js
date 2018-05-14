@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
+import EditGenderComponent from '../Settings/EditGenderSettings';
 import { getUser, saveUser } from '../../config/userinfo.js';
 
 export default class ProfileSettingsComponent extends Component {
@@ -39,7 +40,7 @@ export default class ProfileSettingsComponent extends Component {
   }
 
 
-  switchToEdit = (pageHeader, field) => {
+  switchToEditText = (pageHeader, field) => {
     const { state, navigate } = this.props.navigation;
     navigate('EditSettings', {
       go_back_key: state.key,
@@ -49,36 +50,88 @@ export default class ProfileSettingsComponent extends Component {
     });
   }
 
+  switchToEditGender = (pageHeader, field) => {
+    const { state, navigate } = this.props.navigation;
+    navigate('EditGenderSettings', {
+      go_back_key: state.key,
+      onNavigateBack: this.componentWillMount,
+      pageHeader: pageHeader,
+      fieldValue: field
+    });
+  }
+
+  switchToEditPicker = (pageHeader, field) => {
+    const { state, navigate } = this.props.navigation;
+    navigate('EditSettingsPicker', {
+      go_back_key: state.key,
+      onNavigateBack: this.componentWillMount,
+      pageHeader: pageHeader,
+      fieldValue: field
+    });
+  }
+
   render() {
-    var bgColor = '#fff';
     return (
-      <View style={{ backgroundColor: bgColor, flex: 1 }}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>Profile Settings</Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Profile Settings</Text>
         </View>
-        <View style={{ backgroundColor: bgColor, flex: 1 }}>
-          <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
-            <SettingsList.Header headerStyle={{ marginTop: 15 }} />
-            <SettingsList.Item titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
-            <SettingsList.Item titleInfo={this.state.userGender} hasNavArrow={true} title='Gender'
-              onPress={() => this.switchToEdit('Gender', this.state.userGender)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedGender} hasNavArrow={true} title='Interested In (Gender)'
-              onPress={() => this.switchToEdit('Interested Gender', this.state.userInterestedGender)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedAge} hasNavArrow={true} title='Interested In (Age)'
-              onPress={() => this.switchToEdit('Interested Age', this.state.userInterestedAge)} />
-              <SettingsList.Item titleInfo={this.state.userHometown} hasNavArrow={true} title='Hometown'
-              onPress={() => this.switchToEdit('Hometown', this.state.userHometown)} />
-            <SettingsList.Item titleInfo={this.state.userInterestedDistance} hasNavArrow={true} title='Interested In (Distance)'
-              onPress={() => this.switchToEdit('Interested Distance', this.state.userInterestedDistance)} />
-            <SettingsList.Item title='Filtered Words'
-              onPress={() => this.switchToEdit('Filtered Words', ' ')} />
+        <View style={styles.container}>
+          <SettingsList borderColor='#ded3f6' defaultItemSize={50}>
+            <SettingsList.Header headerText='My Profile Properties' headerStyle={styles.itemDivider} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userBirthday} hasNavArrow={false} title='Birthday' />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userHometown} hasNavArrow={true} title='Hometown'
+              onPress={() => this.switchToEditText('Hometown', this.state.userHometown)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userGender} hasNavArrow={true} title='Gender'
+              onPress={() => this.switchToEditGender('Gender', this.state.userGender)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} title='Likes'
+              onPress={() => this.switchToEditText('Likes', ' ')} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} title='Dislikes'
+              onPress={() => this.switchToEditText('Dislikes', ' ')} />
+            <SettingsList.Header headerText='Match Properties' headerStyle={styles.itemDivider} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedGender} hasNavArrow={true} title='Interested In (Gender)'
+              onPress={() => this.switchToEditGender('Interested Gender', this.state.userInterestedGender)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedAge} hasNavArrow={true} title='Interested In (Age)'
+              onPress={() => this.switchToEditPicker('Interested Age', this.state.userInterestedAge)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userInterestedDistance} hasNavArrow={true} title='Interested In (Distance)'
+              onPress={() => this.switchToEditPicker('Interested Distance', this.state.userInterestedDistance)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} title='Filtered Words'
+              onPress={() => this.switchToEditText('Filtered Words', ' ')} />
           </SettingsList>
         </View>
       </View>
     );
   }
-
   onValueChange(value) {
     this.setState({ switchValue: value });
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ded3f6',
+    flex: 1,
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor: '#c8c7cc'
+  },
+  itemTextStyle: {
+    color: '#5228b8',
+  },
+  itemDivider: {
+    fontFamily: 'Avenir',
+    fontWeight: 'bold',
+    backgroundColor: "#ded3f6",
+    marginTop: 15,
+  },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir',
+    fontSize: 18
+  },
+});

@@ -10,7 +10,9 @@ import ProfileScreen from '../screens/Profile/ProfileScreen.js';
 import ExploreScreen from '../screens/Profile/ExploreScreen.js';
 import MainSettings from '../screens/Settings/MainSettings.js';
 import EditSettings from '../screens/Settings/EditSettings.js';
-import LoginScreen from '../screens/Login/LoginScreen.js'
+import EditGenderSettings from '../screens/Settings/EditGenderSettings.js';
+import EditSettingsPicker from '../screens/Settings/EditSettingsPicker.js';
+import LoginScreen from '../screens/Login/LoginScreen.js';
 
 export const SettingsStack = StackNavigator({
   MainSettings: {
@@ -21,6 +23,12 @@ export const SettingsStack = StackNavigator({
   },
   EditSettings: {
     screen: EditSettings
+  },
+  EditGenderSettings: {
+    screen: EditGenderSettings
+  },
+  EditSettingsPicker: {
+    screen: EditSettingsPicker
   },
   AccountSettings: {
     screen: AccountSettings
