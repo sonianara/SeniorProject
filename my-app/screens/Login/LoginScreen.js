@@ -7,10 +7,20 @@ import * as firebase from 'firebase';
 import config from '../../App.js';
 import ExploreScreen from '../../screens/Profile/ProfileScreen.js';
 import { getUser, saveUser } from '../../config/userinfo.js';
+import DatabaseConnections from '../../backend/DatabaseConnections.js';
 
 const APP_ID = "413413412439784";
 
 export default class LoginScreen extends React.Component {
+  constructor(props) {
+      super(props);
+
+      this.state = {
+        modalVisible: false,
+      };
+
+      this.db = new DatabaseConnections();
+   }
 
   state = {
     modalVisible: false,
@@ -18,29 +28,6 @@ export default class LoginScreen extends React.Component {
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
-  }
-
-  addUserToDatabase = (user) => {
-    const newUser = {
-      "id": user.id,
-      "name": user.name,
-      "age": 21,
-      "picture": user.picture ? user.picture.data.url : " ",
-      "birthday": user.birthday ? user.birthday : " ",
-      "hometown": user.hometown ? user.hometown.name : " ",
-      "gender": user.gender ? user.gender : " ",
-      "email": user.email ? user.email : " ",
-      "description": "Enter description here"
-    }
-    firebase.database().ref('users/user ' + user.id).update(newUser);
-    saveUser(newUser);
-  }
-
-  getUserFromDatabase = async (userId) => {
-    var db = firebase.database();
-    return await db.ref('users/user ' + userId).once('value').then(function(snapshot) {
-      return snapshot.val();
-    });
   }
 
   userExists = async (user) => {
@@ -72,11 +59,12 @@ export default class LoginScreen extends React.Component {
       const userExists = await this.userExists(userInfo);
 
       if (userExists == false) {
-        this.addUserToDatabase(userInfo);
+        this.db.addUserToDatabase(userInfo);
       }
       else {
         newUser = false;
-        const dbInfo = await this.getUserFromDatabase(userInfo.id);
+        const dbInfo = await this.db.getUserFromDatabase(userInfo.id);
+        console.log(dbInfo);
         saveUser(dbInfo);
       }
       navigate('ProfileScreen', { go_back_key: state.key, newUser: newUser });

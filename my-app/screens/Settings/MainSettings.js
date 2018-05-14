@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     borderColor:'#c8c7cc'
   },
   headerText: {
-    alignSelf:'center', 
-    marginTop: 10, 
-    marginBottom: 10, 
-    fontWeight:'bold', 
+    alignSelf:'center',
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight:'bold',
     fontFamily: 'Avenir',
     fontSize: 18
   },

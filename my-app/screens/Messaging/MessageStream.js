@@ -1,35 +1,56 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert} from 'react-native';
-import SettingsList from 'react-native-settings-list';
+import * as React from 'react';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { Alert, StyleSheet, View } from 'react-native';
 
-export default class MessageStream extends Component {
-  
-   constructor() {
-      super();
-      this.onValueChange = this.onValueChange.bind(this);
-      this.state = {switchValue: false};
-   }
 
-   render() {
+export default class MessageStream extends React.Component {
+  state = {
+    messages: [],
+  }
 
-      var bgColor = '#DCE3F4';
-      const { state, navigate } = this.props.navigation;
+  componentWillMount() {
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: 'Start Your Conversation Here',
+          createdAt: new Date(),
+          renderAvatar:null,
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://placeimg.com/140/140/any',
+          },
+        },
+      ],
+    })
+  }
 
-      return (
-         <View style={{backgroundColor:'#EFEFF4', flex:1}}>
-            <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
-	             <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>
-                    Conversation
-                 </Text>
-	          </View>
-            <View style={{backgroundColor:'#EFEFF4', flex:1}}>
-              <Text>Placeholder for message screen</Text>
-           </View>
-        </View>
-      );
-   }
 
-   onValueChange(value) {
-      this.setState({switchValue: value});
-   }
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }))
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+      </View>
+    )
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ded3f6',
+  },
+});
