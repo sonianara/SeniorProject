@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert, Button, FlatList, List, ScrollView, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableHighlight} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import MessageStream from './MessageStream.js';
 import config from '../../App.js';
@@ -56,7 +56,8 @@ export default class MessageScreen extends Component {
              console.log(val);
              console.log("index: " + index);
              var size = Object.keys(snapshot.val()).length;
-             if (snapshot.val()[val] === "yes") {
+             if (snapshot.val()[val] === "yes" &&
+               (val !== ("user " + userInfo["id"]))) {
                db.child('users/' + val).once('value')
                .then((snapshot) => {
                  arr.push({["key"]:val, ["pic"]:snapshot.val().picture, ["name"]:snapshot.val().name});
@@ -74,11 +75,12 @@ export default class MessageScreen extends Component {
 
    onPress = (item) => {
      const { state, navigate } = this.props.navigation;
-     navigate('MessageStream', {reciever: item.target.value})
+     navigate('MessageStream')
    }
 
    renderItem = ({item}) => (
-     <TouchableHighlight style={styles.imageContainer }>
+     <TouchableHighlight style={styles.imageContainer }
+       onPress={this.onPress}>
        <Image style={ styles.image } source={{ uri: item.pic}} />
      </TouchableHighlight>
    );
