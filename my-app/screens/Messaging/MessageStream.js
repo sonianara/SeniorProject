@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { Alert, StyleSheet, View } from 'react-native';
+
 
 export default class MessageStream extends React.Component {
   state = {
@@ -33,13 +35,22 @@ export default class MessageStream extends React.Component {
 
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        user={{
-          _id: 1,
-        }}
-      />
+      <View style={styles.container}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+      </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ded3f6',
+  },
+});
