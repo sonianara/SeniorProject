@@ -33,23 +33,16 @@ export default class Card extends React.Component {
   render() {
     return (
       <View style={styles.card}>
-        <View style={{ borderBottomWidth: 1, backgroundColor: '#f7f7f8', borderColor: '#c8c7cc' }}>
-          <Text style={{ alignSelf: 'center', marginTop: 50, marginBottom: 10, fontWeight: 'bold', fontSize: 16 }}>
-            Explore
-        </Text>
-        </View>
         <View style={{ borderBottomWidth: 1, backgroundColor: '#fff', flexDirection: "row", alignSelf: "flex-end" }}>
         </View>
         <View style={styles.container}>
           <Image source={{ uri: this.props.picture }} style={styles.profilePicture} />
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 32 }} >
-            {this.props.name + ", " + this.props.age}
-          </Text>
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 10, fontSize: 22 }} >
-            {this.props.hometown}
-          </Text>
-          <ScrollView style={{ width: "85%" }}>
-            <Text >{this.props.description}</Text>
+          <Text style={styles.nameHeader}>{this.props.name + ", " + this.props.age}</Text>
+          <Text style={styles.locationHeader}>{this.props.hometown}</Text>
+          <ScrollView style={styles.scrollbox}>
+            <Text style={styles.descriptionBox}>{this.props.description}</Text>
+            <Text style={styles.locationHeader} >{'Likes: '}</Text>
+            <Text style={styles.locationHeader} >{'Dislikes: '}</Text>
           </ScrollView>
         </View>
       </View>
@@ -58,6 +51,11 @@ export default class Card extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
   textStyle: {
     marginLeft: 10,
     marginTop: 10,
@@ -67,13 +65,13 @@ const styles = StyleSheet.create({
   },
   card: {
     alignItems: 'center',
-    marginTop: 50,
+    width: '100%',
+    marginTop: 10,
     marginBottom: 10,
     borderRadius: 5,
     overflow: 'hidden',
-    borderColor: 'grey',
     backgroundColor: 'white',
-    borderWidth: 1,
+    borderWidth: 0,
     elevation: 1,
     flex: 1,
     justifyContent: 'center',
@@ -96,5 +94,24 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginTop: 20,
+    alignItems: 'center',
+  },
+  nameHeader: {
+    marginTop: 10,
+    fontSize: 26,
+    fontFamily: 'Avenir',
+  },
+  locationHeader: {
+    marginTop: 5,
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  },
+  scrollbox: {
+    width: "85%",
+  },
+  descriptionBox: {
+    marginTop: 10,
+    fontSize: 20,
+    fontFamily: 'Gill Sans',
   },
 })

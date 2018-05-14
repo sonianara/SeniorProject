@@ -14,8 +14,11 @@ export default class ExploreScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: '#EFEFF4', flex: 1 }}>
-        <ProfileCard style={{ flex: 1 }} />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Explore</Text>
+        </View>
+          <ProfileCard />
       </View>
     );
   }
@@ -24,8 +27,19 @@ export default class ExploreScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#ded3f6',
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor: '#c8c7cc',
+  },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 50,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Avenir',
   },
 });

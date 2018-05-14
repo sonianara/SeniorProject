@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Slider } from 'react-native';
 import Prompt from 'rn-prompt';
 import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
 
-export default class EditSettingsComponent extends Component {
+export default class EditPickerComponent extends Component {
   constructor(props) {
     super(props);
     const { state, navigate } = this.props.navigation;
+    const range = (state.params.fieldValue).split('-');
     this.state = {
       userID: "0",
       userName: "New User",
       category: state.params.pageHeader,
       inputText: state.params.fieldValue,
-      promptVisible: false
+      inputMin: range[0],
+      inputMax: (range.length > 0 ? range[1] : range[0]),
     };
   }
 
@@ -38,11 +40,23 @@ export default class EditSettingsComponent extends Component {
     this.props.navigation.state.params.onNavigateBack();
   }
 
+  updateValue = () => {
+    this.handleEdit(this.state.inputMin + "-" + this.state.inputMax);
+  }
+
+  changeMin = (value) => {
+    this.setState({ inputMin: String(value), });
+  }
+
+  changeMax = (value) => {
+    this.setState({ inputMax: String(value), });
+  }
+
   render() {
-    var bgColor = '#DCE3F4';
-    const { state, navigate } = this.props.navigation;
-    const pageHeader = state.params.pageHeader;
-    const field = state.params.fieldValue;
+    const pageHeader = this.props.navigation.state.params.pageHeader;
+    const maxValue = pageHeader === 'Interested Age' ? 50 : 200;
+    const minValue = pageHeader === 'Interested Age' ? 18 : 0;
+    const step = pageHeader === 'Interested Age' ? 1 : 10;
 
     return (
       <View style={styles.container}>
@@ -52,21 +66,26 @@ export default class EditSettingsComponent extends Component {
         <View style={styles.settingsList}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 15 }} />
-            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputText} hasNavArrow={false} title={pageHeader}
-              onPress={() => this.setState({ promptVisible: true })} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputMin} hasNavArrow={false} title={"Minimum " + pageHeader} />
+            <Slider style={styles.slider}
+              step={step} minimumValue={minValue} maximumValue={maxValue}
+              minimumTrackTintColor='#B899FB' maximumTrackTintColor='#2E1367'
+              onSlidingComplete={this.updateValue.bind(this)}
+              onValueChange={this.changeMin.bind(this)} value={Number(this.state.inputMin)} />
+            <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.inputMax} hasNavArrow={false} title={"Maximum " + pageHeader} />
+            <Slider style={styles.slider}
+              step={step} minimumValue={minValue} maximumValue={maxValue}
+              minimumTrackTintColor='#B899FB' maximumTrackTintColor='#2E1367'
+              onSlidingComplete={this.updateValue.bind(this)}
+              onValueChange={this.changeMax.bind(this)} value={Number(this.state.inputMax)} />
           </SettingsList>
         </View>
-        <Prompt
-          title={"Enter New Value for " + pageHeader + ":"} placeholder={field}
-          defaultValue={field} visible={this.state.promptVisible}
-          onCancel={() => this.setState({ promptVisible: false })}
-          onSubmit={(value) => this.handleEdit(value)} />
       </View>
     );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ded3f6',
     flex: 1,
@@ -81,8 +100,8 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold',
-    fontFamily: 'Avenir',
     fontSize: 18,
+    fontFamily: 'Avenir',
   },
   settingsList: {
     backgroundColor: '#ded3f6',
@@ -90,5 +109,8 @@ var styles = StyleSheet.create({
   },
   itemTextStyle: {
     color: '#5228b8',
+  },
+  slider: {
+    backgroundColor: '#EFEFF4',
   },
 });

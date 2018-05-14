@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Alert} from 'react-native';
 import SettingsList from 'react-native-settings-list';
-
 import AccountSettings from '../../screens/Settings/AccountSettings.js';
 import ProfileSettings from '../../screens/Settings/ProfileSettings.js';
 
@@ -12,23 +11,21 @@ export default class MainSettingsComponent extends Component {
       this.onValueChange = this.onValueChange.bind(this);
       this.state = {switchValue: false};
    }
+
    render() {
-
       const { state, navigate } = this.props.navigation;
-      var bgColor = '#DCE3F4';
-
       return (
-         <View style={{backgroundColor:'#EFEFF4', flex:1}}>
-            <View style={{borderBottomWidth:1, backgroundColor: '#f7f7f8', borderColor:'#c8c7cc'}}>
-	             <Text style={{alignSelf:'center', marginTop:50, marginBottom:10, fontWeight:'bold', fontSize: 16}}>Main Settings</Text>
+         <View style={styles.container}>
+            <View style={styles.header}>
+	             <Text style={styles.headerText}>Main Settings</Text>
 	          </View>
-	          <View>
+	          <View style={{flex: 1}}>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
-	              <SettingsList.Item hasNavArrow={true} title='Profile Settings'
+	              <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Profile Settings'
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			             onPress={() => navigate('ProfileSettings', { go_back_key: state.key })}/>
-                <SettingsList.Item hasNavArrow={true} title='Account Settings'
+                <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Account Settings'
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
 			             onPress={() => navigate('AccountSettings', { go_back_key: state.key })}/>
               </SettingsList>
@@ -41,3 +38,26 @@ export default class MainSettingsComponent extends Component {
       this.setState({switchValue: value});
    }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ded3f6',
+    flex: 1,
+  },
+  header: {
+    borderBottomWidth: 1,
+    backgroundColor: '#C1A9F6',
+    borderColor:'#c8c7cc'
+  },
+  headerText: {
+    alignSelf:'center', 
+    marginTop: 10, 
+    marginBottom: 10, 
+    fontWeight:'bold', 
+    fontFamily: 'Avenir',
+    fontSize: 18
+  },
+  itemTextStyle: {
+    color: '#5228b8',
+  },
+});
