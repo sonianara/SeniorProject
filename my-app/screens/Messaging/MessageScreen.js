@@ -17,8 +17,6 @@ export default class MessageScreen extends Component {
         switchValue: false,
         matches: [],
         receiver: "",
-        userPicture: "",
-        userName: "",
       };
       this.db = new DatabaseConnections();
    }
@@ -27,20 +25,6 @@ export default class MessageScreen extends Component {
 
    componentDidMount() {
      this.getMatchesFromDatabase();
-   }
-
-   getUserProfilePic = (userId) => {
-     firebase.database().ref('users/' + userId).once('value').then((snapshot) => {
-       this.setState({userPicture: snapshot.val().picture});
-       console.log(this.state.userPicture)
-     });
-   }
-
-   getUserName = (userId) => {
-     firebase.database().ref('users/' + userId).once('value').then((snapshot) => {
-       this.setState({userName: snapshot.val().name});
-       console.log(this.state.userName)
-     });
    }
 
    getMatchesFromDatabase = () => {
@@ -53,8 +37,6 @@ export default class MessageScreen extends Component {
            var index = 0;
            arr = [];
            for (var val in snapshot.val()) {
-             console.log(val);
-             console.log("index: " + index);
              var size = Object.keys(snapshot.val()).length;
              if (snapshot.val()[val] === "yes" &&
                (val !== ("user " + userInfo["id"]))) {
@@ -84,12 +66,6 @@ export default class MessageScreen extends Component {
        <Image style={ styles.image } source={{ uri: item.pic}} />
      </TouchableHighlight>
    );
-
-   /*<TouchableHighlight
-      onPress={this.onPress.bind(item)}>
-      <Text>{item.name}</Text>
-   </TouchableHighlight>*/
-
 
    render() {
       var bgColor = '#DCE3F4';

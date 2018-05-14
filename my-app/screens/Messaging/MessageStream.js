@@ -17,13 +17,8 @@ export default class MessageStream extends React.Component {
         },
       ],
     })
-    this.printItem();
   }
 
-  printItem = () => {
-    console.log("printing user from before")
-    console.log(this.props.navigation.state.params.reciever);
-  }
 
   onSend(messages = []) {
     this.setState(previousState => ({
