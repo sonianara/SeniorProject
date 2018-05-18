@@ -31,7 +31,8 @@ export default class DatabaseConnections extends React.Component {
   getUsersFromDatabase = (user) => {
     const userInfo = JSON.parse(user)
     var db = firebase.database();
-    return db.ref('users/').orderByChild("interested age")
+    return db.ref('users/')
+      .orderByChild("interested age")
       .equalTo(userInfo["interested age"])
       .once('value')
       .then(function(snapshot) {

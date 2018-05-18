@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableOpacity} from 'react-native';
 import SettingsList from 'react-native-settings-list';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import MessageStream from './MessageStream.js';
 import config from '../../App.js';
 import * as firebase from 'firebase';
@@ -28,47 +29,80 @@ export default class MessageScreen extends Component {
      this.getMatchesFromDatabase();
    }
 
-   getMatchesFromDatabase = () => {
-     const user = getUser().then((user) => {
-       const userInfo = JSON.parse(user)
-       var db = firebase.database().ref();
-       db.child('matches/user ' + userInfo["id"])
-         .once('value')
-         .then((snapshot) => {
-           var index = 0;
-           arr = [];
-           for (var val in snapshot.val()) {
-             var size = Object.keys(snapshot.val()).length;
-             if (snapshot.val()[val] === "yes" &&
-               (val !== ("user " + userInfo["id"]))) {
-               db.child('users/' + val).once('value')
-               .then((snapshot) => {
-                 arr.push({["key"]:snapshot.val().id, ["pic"]:snapshot.val().picture, ["name"]:snapshot.val().name});
-                 console.log("ARRAY!!!!!!!!", arr);
-                 if (index === size) {
-                   this.setState({matches:arr});
-                 }
-               })
-             }
-             index++;
-           }
-         });
-      });
-   }
+  getMatchesFromDatabase = () => {
+    const user = getUser().then((user) => {
+      const userInfo = JSON.parse(user)
+      var db = firebase.database().ref();
+      db.child('matches/user ' + userInfo["id"])
+        .once('value')
+        .then((snapshot) => {
+          var index = 0;
+          arr = [];
+          for (var val in snapshot.val()) {
+            var size = Object.keys(snapshot.val()).length;
+            if (snapshot.val()[val] === "yes" &&
+              (val !== ("user " + userInfo["id"]))) {
+              db.child('users/' + val).once('value')
+                .then((snapshot) => {
+                  arr.push({ ["key"]: snapshot.val().id, ["pic"]: snapshot.val().picture, ["name"]: snapshot.val().name });
+                  if (index === size) {
+                    this.setState({ matches: arr });
+                  }
+                })
+            }
+            index++;
+          }
+        });
+    });
+  }
 
    onPress = (userID, userName) => {
      const { state, navigate } = this.props.navigation;
      navigate('MessageStream', {recieverID: userID, recieverName: userName})
    }
 
-   renderItem = ({item}) => {
+
+   renderBubble = ({item}) => {
      return (
        <View style={styles.column}>
-         <TouchableHighlight style={styles.imageContainer }
+         <TouchableOpacity
+           onPress={() =>
+             Alert.alert(
+               'Choose an option',
+               'Message or View Profile?',
+              [
+                {text: 'Send Message', onPress: () => this.onPress(item.key, item.name)},
+                {text: 'View Profile', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              ],
+            )}>
+           <Image style={ styles.image } source={{ uri: item.pic}} />
+         </TouchableOpacity>
+         <Text>{item.name}</Text>
+       </View>
+     )
+   };
+
+/*
+   renderBubble = ({item}) => {
+     return (
+       <View style={styles.column}>
+         <TouchableOpacity
            onPress={() => this.onPress(item.key, item.name)}>
            <Image style={ styles.image } source={{ uri: item.pic}} />
-         </TouchableHighlight>
+         </TouchableOpacity>
          <Text>{item.name}</Text>
+       </View>
+     )
+   }; */
+
+   renderItem = ({item}) => {
+     return (
+       <View style={styles.row}>
+         <TouchableOpacity
+           onPress={() => this.onPress(item.key, item.name)}>
+           <Text style={styles.sender}>{item.name}</Text>
+           <Icon style={styles.arrowIcon} name="angle-right" size={24} color="#2A2B30" />
+         </TouchableOpacity>
        </View>
      )
    };
@@ -84,8 +118,12 @@ export default class MessageScreen extends Component {
             <View>
             <FlatList
               data={this.state.matches}
-              renderItem={this.renderItem}
+              renderItem={this.renderBubble}
               horizontal={true}
+            />
+            <FlatList
+              data={this.state.matches}
+              renderItem={this.renderItem}
             />
            </View>
         </View>
@@ -104,6 +142,7 @@ const styles = StyleSheet.create({
   backgroundColor: '#ded3f6',
   flexDirection: 'column',
   alignItems: 'center',
+  marginBottom:0
  },
  header: {
    borderBottomWidth: 1,
@@ -123,11 +162,6 @@ const styles = StyleSheet.create({
     width: 128,
     borderRadius: 64
   },
- item: {
-   padding: 10,
-   fontSize: 18,
-   height: 44,
- },
  image: {
     height:128,
     width: 128,
@@ -139,4 +173,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
   },
+  row: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  sender: {
+    fontWeight: '200',
+    paddingRight: 10,
+    fontSize: 18,
+  },
+  arrowIcon: {
+    position:'absolute',
+    right:0
+  }
 })
