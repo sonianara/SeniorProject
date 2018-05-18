@@ -34,26 +34,29 @@ export default class MessageStream extends React.Component {
           recieverID: this.props.navigation.state.params.recieverID,
           userID: userInfo.id,
           userPic: userInfo.picture,
-          messages: snapshot.val(),
+          messages: snapshot.val() === null ? [] : snapshot.val(),
         });
       });
     });
   }
 
   onSend(messages) {
-    console.log("user picture url: " + this.state.userPic);
+    console.log("user picture url: ", this.state.userPic);
+    console.log("messages ", messages);
     this.setState((previousState) => {
-      this.state.messages.concat(previousState);
+      console.log("previous state: ", previousState);
+      //this.state.messages.concat(previousState);
       var messageObj = GiftedChat.append(previousState.messages, messages);
+      this.state.messages.concat(messageObj);
       var size = Object.keys(messageObj).length;
       var key = Object.keys(messageObj)[0];
       messageObj[key]["user"]["reciever"] = this.state.recieverName;
       messageObj[key]["user"]["_id"] = this.state.recieverID;
       messageObj[key]["user"]["avatar"] = this.state.userPic;
       firebase.database().ref('messages/user ' + this.state.userID).set(messageObj);
-
+      console.log("this state messages: ", this.state.messages);
       return {
-        messages: this.state.messages,
+        messages: messageObj,
       };
     });
   }
