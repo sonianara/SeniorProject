@@ -43,7 +43,6 @@ export default class ProfileCard extends React.Component {
       const rootRef = firebase.database().ref();
       const childRef = rootRef.child('matches/user ' + card.id+'/user ' + userInfo.id);
       childRef.once('value', function (snapshot) {
-        console.log("here: " + snapshot.val());
         if (snapshot.val() === "yes") {
           Alert.alert("Match!")
         }

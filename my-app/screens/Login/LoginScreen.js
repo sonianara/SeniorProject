@@ -64,7 +64,6 @@ export default class LoginScreen extends React.Component {
       else {
         newUser = false;
         const dbInfo = await this.db.getUserFromDatabase(userInfo.id);
-        console.log(dbInfo);
         saveUser(dbInfo);
       }
       navigate('ProfileScreen', { go_back_key: state.key, newUser: newUser });
