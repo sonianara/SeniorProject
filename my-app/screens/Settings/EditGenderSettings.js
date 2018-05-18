@@ -8,7 +8,7 @@ import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
-const genders = [{ gender: 'Female' }, { gender: 'Male' }, { gender: 'Other' }];
+const genders = [{ gender: 'Female' }, { gender: 'Male' }, { gender: 'Male and Female'}, { gender: 'Other' }];
 const PickerItemIOS = PickerIOS.Item;
 
 export default class EditGenderComponent extends Component {
