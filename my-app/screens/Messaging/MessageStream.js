@@ -20,12 +20,14 @@ export default class MessageStream extends React.Component {
   componentDidMount() {
     getUser().then((user) => {
       const userInfo = JSON.parse(user);
+      console.log('messages/user ' + userInfo.id + "/user " + this.props.navigation.state.params.recieverID)
       firebase.database().ref()
-      .child('messages/user ' + userInfo.id)
-      .orderByChild("user/reciever")
-      .equalTo(this.props.navigation.state.params.recieverName)
+      .child('messages/user ' + userInfo.id + "/user " + this.props.navigation.state.params.recieverID)
+      //.orderByChild("user/reciever")
+      //.equalTo(this.props.navigation.state.params.recieverName)
       .once('value')
       .then((snapshot) => {
+        console.log("from the db snapshot: ", snapshot.val());
         this.setState({
           recieverName: this.props.navigation.state.params.recieverName,
           recieverID: this.props.navigation.state.params.recieverID,
@@ -40,13 +42,13 @@ export default class MessageStream extends React.Component {
   onSend(messages) {
     this.setState((previousState) => {
       var messageObj = GiftedChat.append(previousState.messages, messages);
-      this.state.messages.concat(messageObj);
+      this.state.messages.concat(previousState);
       var size = Object.keys(messageObj).length;
       var key = Object.keys(messageObj)[0];
       messageObj[key]["user"]["reciever"] = this.state.recieverName;
       messageObj[key]["user"]["_id"] = this.state.recieverID;
       messageObj[key]["user"]["avatar"] = this.state.userPic;
-      firebase.database().ref('messages/user ' + this.state.userID).set(messageObj);
+      firebase.database().ref('messages/user ' + this.state.userID + "/user " + this.state.recieverID).set(messageObj);
       return {
         messages: messageObj,
       };
