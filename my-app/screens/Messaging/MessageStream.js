@@ -20,14 +20,10 @@ export default class MessageStream extends React.Component {
   componentDidMount() {
     getUser().then((user) => {
       const userInfo = JSON.parse(user);
-      console.log('messages/user ' + userInfo.id + "/user " + this.props.navigation.state.params.recieverID)
       firebase.database().ref()
       .child('messages/user ' + userInfo.id + "/user " + this.props.navigation.state.params.recieverID)
-      //.orderByChild("user/reciever")
-      //.equalTo(this.props.navigation.state.params.recieverName)
       .once('value')
       .then((snapshot) => {
-        console.log("from the db snapshot: ", snapshot.val());
         this.setState({
           recieverName: this.props.navigation.state.params.recieverName,
           recieverID: this.props.navigation.state.params.recieverID,
