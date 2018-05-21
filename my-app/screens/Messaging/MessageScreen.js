@@ -115,16 +115,18 @@ export default class MessageScreen extends Component {
             <View style={styles.header}>
 	             <Text style={styles.headerText}>Messages</Text>
 	          </View>
-            <View>
-            <FlatList
-              data={this.state.matches}
-              renderItem={this.renderBubble}
-              horizontal={true}
-            />
-            <FlatList
-              data={this.state.matches}
-              renderItem={this.renderItem}
-            />
+            <View style={styles.bubbleContainer}>
+              <FlatList
+                data={this.state.matches}
+                renderItem={this.renderBubble}
+                horizontal={true}
+              />
+            <View style={styles.listContainer}>
+              <FlatList
+                data={this.state.matches}
+                renderItem={this.renderItem}
+              />
+            </View>
            </View>
         </View>
       );
@@ -139,10 +141,8 @@ export default class MessageScreen extends Component {
 const styles = StyleSheet.create({
  container: {
   flex: 1,
-  backgroundColor: '#ded3f6',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginBottom:0
+  marginBottom:0,
+  backgroundColor: '#ded3f6'
  },
  header: {
    borderBottomWidth: 1,
@@ -156,6 +156,16 @@ const styles = StyleSheet.create({
    fontWeight:'bold',
    fontFamily: 'Avenir',
    fontSize: 18
+ },
+ listContainer: {
+   backgroundColor: '#ded3f6',
+   marginTop: 40,
+   marginLeft: 10
+ },
+ bubbleContainer: {
+   backgroundColor: '#ded3f6',
+   flexDirection: 'column',
+   marginTop: 10
  },
  circleContainer: {
     height:128,
@@ -174,7 +184,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   row: {
-    padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
