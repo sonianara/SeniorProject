@@ -36,9 +36,11 @@ export default class Card extends React.Component {
         <View style={{ borderBottomWidth: 1, backgroundColor: '#fff', flexDirection: "row", alignSelf: "flex-end" }}>
         </View>
         <View style={styles.container}>
-          <Image source={{ uri: this.props.picture }} style={styles.profilePicture} />
-          <Text style={styles.nameHeader}>{this.props.name + ", " + this.props.age}</Text>
-          <Text style={styles.locationHeader}>{this.props.hometown}</Text>
+          <View style={styles.basicInfo}>
+            <Text style={styles.nameHeader}>{this.props.name + ", " + this.props.age}</Text>
+            <Image source={{ uri: this.props.picture }} style={styles.profilePicture} />
+            <Text style={styles.locationHeader}>{this.props.hometown}</Text>
+          </View>
           <ScrollView style={styles.scrollbox}>
             <Text style={styles.descriptionBox}>{this.props.description}</Text>
             <Text style={styles.locationHeader} >{'Likes: '}</Text>
@@ -53,7 +55,7 @@ export default class Card extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#ded3f6',
     alignItems: 'center',
   },
   textStyle: {
@@ -93,8 +95,15 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 300,
     height: 300,
-    marginTop: 20,
+    marginTop: 10,
     alignItems: 'center',
+  },
+  basicInfo: {
+    width: "100%",
+    backgroundColor: '#ded3f6',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: '#C1A9F6',
   },
   nameHeader: {
     marginTop: 10,
@@ -102,7 +111,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir',
   },
   locationHeader: {
-    marginTop: 5,
+    marginTop: 10,
+    marginBottom: 10,
     fontSize: 18,
     fontFamily: 'Avenir',
   },

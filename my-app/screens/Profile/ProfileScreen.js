@@ -96,14 +96,11 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.header}>
           <Text style={styles.headerText}>My Profile</Text>
         </View>
-        <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
+        {/* <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
           <TouchableHighlight onPress={this.uploadImage.bind(this)}>
             <Icon name="upload" type="material-community" size={35} />
           </TouchableHighlight>
-          {/* <TouchableHighlight onPress={this.editPage.bind(this)} >
-            <Icon name="edit" type="entypo" size={35} />
-          </TouchableHighlight> */}
-        </View>
+        </View> */}
         <View style={styles.modal}>
           {/*---------------------- MODAL ---------------------->*/}
           <Modal
@@ -163,10 +160,12 @@ export default class ProfileScreen extends React.Component {
             </View>
           </Modal>
           {/*<----------------- END MODAL --------------->*/}
-          <Image source={{ uri: this.state.userPicture }} style={styles.profilePicture} />
-          <Text style={styles.nameHeader} >{this.state.userName + ", " + this.state.userAge}</Text>
-          <Text style={styles.locationHeader} >{this.state.userLocation}</Text>
-          <ScrollView style={{ width: "85%" }}>
+          <View style={styles.basicInfo}>
+            <Text style={styles.nameHeader} >{this.state.userName + ", " + this.state.userAge}</Text>
+            <Image source={{ uri: this.state.userPicture }} style={styles.profilePicture} />
+            <Text style={styles.locationHeader} >{this.state.userLocation}</Text>
+          </View>
+          <ScrollView style={{ width: "85%", }}>
             <Text style={styles.descriptionBox}>{this.state.userDescription}</Text>
             <Text style={styles.locationHeader} >{'Likes: Animals'}</Text>
             <Text style={styles.locationHeader} >{'Dislikes: Planes'}</Text>
@@ -184,7 +183,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#ded3f6',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -192,6 +191,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     backgroundColor: '#C1A9F6',
     borderColor: '#c8c7cc'
+  },
+  basicInfo: {
+    width: "100%",
+    backgroundColor: '#ded3f6',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: '#C1A9F6',
   },
   titleText: {
     fontSize: 20,
@@ -215,7 +221,7 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 300,
     height: 300,
-    marginTop: 20,
+    marginTop: 10,
   },
   nameHeader: {
     marginTop: 10,
@@ -223,7 +229,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir',
   },
   locationHeader: {
-    marginTop: 5,
+    marginTop: 10,
+    marginBottom: 10,
     fontSize: 18,
     fontFamily: 'Avenir',
   },
