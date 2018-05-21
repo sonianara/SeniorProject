@@ -5,6 +5,7 @@ import { TextField } from 'react-native-material-textfield';
 import * as Constants from '../../resources/LoremIpsum.js';
 import editIcon from '../../resources/editIcon.png';
 import uploadIcon from '../../resources/uploadIcon.png';
+import { ImagePicker } from 'expo';
 import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
@@ -82,9 +83,25 @@ export default class ProfileScreen extends React.Component {
     });
   }
 
-  uploadImage = () => {
-    Alert.alert('Route to upload dialog');
-  }
+  uploadImage = async () => {
+   let result = await ImagePicker.launchCameraAsync({
+     allowsEditing: true,
+     aspect: [4, 3],
+   });
+   if (result.cancelled) {
+     return;
+   }
+   // ImagePicker saves the taken photo to disk and returns a local URI to it
+   let localUri = result.uri;
+   let filename = localUri.split('/').pop();
+   // Infer the type of the image
+   let match = /\.(\w+)$/.exec(filename);
+   let type = match ? `image/${match[1]}` : `image`;
+   // Upload the image using the fetch and FormData APIs
+   let formData = new FormData();
+   // Assume "photo" is the name of the form field the server expects
+   formData.append('photo', { uri: localUri, name: filename, type });
+ }
 
   editPage = () => {
     Alert.alert('Switch to edit mode');
@@ -96,11 +113,11 @@ export default class ProfileScreen extends React.Component {
         <View style={styles.header}>
           <Text style={styles.headerText}>My Profile</Text>
         </View>
-        {/* <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
+         <View style={{ borderBottomWidth: 1, flexDirection: "row", alignSelf: "flex-end" }}>
           <TouchableHighlight onPress={this.uploadImage.bind(this)}>
             <Icon name="upload" type="material-community" size={35} />
           </TouchableHighlight>
-        </View> */}
+         </View>
         <View style={styles.modal}>
           {/*---------------------- MODAL ---------------------->*/}
           <Modal
