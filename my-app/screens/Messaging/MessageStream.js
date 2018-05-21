@@ -45,6 +45,8 @@ export default class MessageStream extends React.Component {
       messageObj[key]["user"]["_id"] = this.state.recieverID;
       messageObj[key]["user"]["avatar"] = this.state.userPic;
       firebase.database().ref('messages/user ' + this.state.userID + "/user " + this.state.recieverID).set(messageObj);
+      firebase.database().ref('messages/user ' + this.state.recieverID + "/user " + this.state.userID).set(messageObj);
+
       return {
         messages: messageObj,
       };
