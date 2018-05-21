@@ -28,6 +28,27 @@ export default class DatabaseConnections extends React.Component {
     });
   }
 
+  getYesFromDatabase = (user) => {
+    var arr = [];
+    const userInfo = JSON.parse(user);
+    var db = firebase.database();
+    return db.ref('matches/user ' + userInfo["id"])
+      .once('value')
+      .then((snapshot) => {
+        var index = 0;
+        for (var val in snapshot.val()) {
+          var size = Object.keys(snapshot.val()).length;
+          if (snapshot.val()[val] === "yes") {
+            index++;
+            arr.push(val);
+            if (index === size) {
+              return arr;
+            }
+          }
+        }
+      })
+  }
+
   getUsersFromDatabase = (user) => {
     const userInfo = JSON.parse(user)
     var db = firebase.database();

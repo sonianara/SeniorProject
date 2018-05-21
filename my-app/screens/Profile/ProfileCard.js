@@ -21,17 +21,20 @@ export default class ProfileCard extends React.Component {
     this.db = new DatabaseConnections();
   }
 
-  componentWillMount = async () => {
+  componentWillMount = () => {
     let arr = [];
     const user = getUser().then((user) => {
       var userInfo = JSON.parse(user)
-      this.db.getUsersFromDatabase(user).then((jsonObj) => {
-        for (let val in jsonObj) {
-          if (val != ("user " + userInfo["id"])) {
-            arr.push(jsonObj[val]);
+      this.db.getYesFromDatabase(user).then((yesArr) => {
+        this.db.getUsersFromDatabase(user).then((jsonObj) => {
+          for (let val in jsonObj) {
+            if ((val != ("user " + userInfo["id"])) &&
+                (yesArr.indexOf(val) < 0)) {
+              arr.push(jsonObj[val]);
+            }
           }
-        }
-        this.setState({ cards: arr, })
+          this.setState({ cards: arr, })
+        });
       });
     })
   }
