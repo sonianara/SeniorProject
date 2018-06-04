@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 64
   },
  image: {
-    height:128,
+    height: 128,
     width: 128,
     borderRadius: 64
   },
@@ -185,12 +185,18 @@ const styles = StyleSheet.create({
   },
   row: {
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderTopWidth: 1,
+    paddingBottom: 7,
+    paddingTop: 7,
+    borderBottomColor: '#C1A9F6',
+    borderTopColor: '#C1A9F6',
   },
   sender: {
-    fontWeight: '200',
+    fontWeight: 'bold',
     paddingRight: 10,
     fontSize: 18,
+    fontFamily: 'Avenir',
+    // color: '#4204b5'
   },
   arrowIcon: {
     position:'absolute',
