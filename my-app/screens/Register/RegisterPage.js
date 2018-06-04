@@ -3,7 +3,7 @@ This is a view i use in a test app,
 very useful to list all the use cases
 */
 
-import React from 'react';
+import * as React from 'react';
 
 import {
   AppRegistry,

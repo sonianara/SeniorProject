@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableOpacity} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 import DatabaseConnections from '../../backend/DatabaseConnections.js';
 
-export default class MatchNotification extends Component {
+export default class MatchNotification extends React.Component {
 
    constructor() {
       super();
