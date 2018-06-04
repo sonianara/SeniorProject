@@ -23,7 +23,7 @@ export default class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       userID: 0,
-      modalVisible: false,
+      modalVisible: true,
       userName: "New User",
       birthday: new Date(),
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
@@ -31,7 +31,7 @@ export default class ProfileScreen extends React.Component {
       gender: "Select Gender",
       userAge: "",
       interestedGender: "",
-      interestedAge: [0, 100],
+      interestedAge: [18, 100],
       interestedDistance: [0, 100],
       userDescription: "",
       showDatePicker: false
@@ -141,67 +141,67 @@ export default class ProfileScreen extends React.Component {
             visible={this.state.modalVisible}
             onRequestClose={() => { alert("Modal has been closed"); }}>
             <View style={styles.registrationForm}>
-            <View style={styles.regFields}>
-              <Text style={styles.titleText}>New User Registration</Text>
-              <View>
-                <Text style={styles.mainText}>Birthday</Text>
-                <View style={{borderBottomWidth: 0.5}}>
-                  <TouchableOpacity
-                      onPress={() => this.setState({showDatePicker: !this.state.showDatePicker})}>
-                        <Text style={{fontSize: 16, color: 'grey'}}>{moment(this.state.birthday).format('MM/DD/YYYY')}</Text>
-                  </TouchableOpacity>
+              <View style={styles.regFields}>
+                <Text style={styles.titleText}>New User Registration</Text>
+                <View>
+                  <Text style={styles.mainText}>Birthday</Text>
+                  <View style={{ borderBottomWidth: 0.5 }}>
+                    <TouchableOpacity
+                      onPress={() => this.setState({ showDatePicker: !this.state.showDatePicker })}>
+                      <Text style={{ fontSize: 16, color: 'grey' }}>{moment(this.state.birthday).format('MM/DD/YYYY')}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <DateTimePicker
+                    isVisible={this.state.showDatePicker}
+                    onConfirm={this._handleDatePicked}
+                    onCancel={this._hideDateTimePicker}
+                  />
+                  <TextField
+                    style={{ height: 40 }}
+                    label="Hometown"
+                    onChangeText={(text) => this.setState({ userLocation: text })}
+                  />
+                  <Dropdown
+                    label='Gender'
+                    data={genders}
+                  />
+                  <Dropdown
+                    label='Interested Gender'
+                    data={genders}
+                  />
+                  <Text style={{ fontSize: 16, marginBottom: 25, marginTop: 20 }}>
+                    {"Interested Age: " + this.state.interestedAge[0] + " - " + this.state.interestedAge[1]}
+                  </Text>
+                  <View style={styles.slider}>
+                    <MultiSlider
+                      values={[this.state.interestedAge[0], this.state.interestedAge[1]]}
+                      sliderLength={325} containerStyle={{ height: 12 }}
+                      onValuesChange={this.handleAgeSlider} min={18} max={100} step={1}
+                    />
+                  </View>
+                  <Text style={{ fontSize: 16, marginBottom: 25, marginTop: 20 }}>
+                    {"Interested Distance: " + this.state.interestedDistance[0] + " - " + this.state.interestedDistance[1] + " miles"}
+                  </Text>
+                  <View style={styles.slider}>
+                    <MultiSlider
+                      values={[this.state.interestedDistance[0], this.state.interestedDistance[1]]}
+                      sliderLength={325} onValuesChange={this.handleDistanceSlider}
+                      containerStyle={{ height: 12 }} min={0} max={100} step={1}
+                    />
+                  </View>
+                  <TextField
+                    style={{ height: 40 }}
+                    label="Bio (Optional)"
+                    onChangeText={(text) => this.setState({ userDescription: text })}
+                  />
                 </View>
-                <DateTimePicker
-                  isVisible={this.state.showDatePicker}
-                  onConfirm={this._handleDatePicked}
-                  onCancel={this._hideDateTimePicker}
-                />
-                <TextField
-                  style={{ height: 40 }}
-                  label="Hometown"
-                  onChangeText={(text) => this.setState({ userLocation: text })}
-                />
-                <Dropdown
-                  label='Select Gender'
-                  data={genders}
-                />
-                <Text style={{fontSize: 16, marginBottom: 20, marginTop: 20}}>Interested Age</Text>
-                <MultiSlider
-                    values={[this.state.interestedAge[0], this.state.interestedAge[1]]}
-                    sliderLength={325}
-                    onValuesChange={this.handleAgeSlider}
-                    min={0}
-                    max={100}
-                    step={1}
-                />
-                <Text style={{fontSize: 16}}>{"Minimum Age: " + this.state.interestedAge[0] + ", Maximum Age: " + this.state.interestedAge[1]}</Text>
-                <Dropdown
-                  style={{marginBottom: 20}}
-                  label='Select Interested Gender'
-                  data={genders}
-                />
-                <MultiSlider
-                    values={[this.state.interestedDistance[0], this.state.interestedDistance[1]]}
-                    sliderLength={325}
-                    onValuesChange={this.handleDistanceSlider}
-                    min={0}
-                    max={100}
-                    step={1}
-                />
-                <Text style={{fontSize: 16}}>{"Minimum Age: " + this.state.interestedDistance[0] + ", Maximum Age: " + this.state.interestedDistance[1]}</Text>
-                <TextField
-                  style={{ height: 40 }}
-                  label="Bio (Optional)"
-                  onChangeText={(text) => this.setState({ userDescription: text })}
-                />
-              </View>
-              <TouchableOpacity
-                onPress={(value) => {
-                  this.handleEdit(value);
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text style={styles.submitButton}>Submit</Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={(value) => {
+                    this.handleEdit(value);
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}>
+                  <Text style={styles.submitButton}>Submit</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </Modal>
@@ -213,8 +213,6 @@ export default class ProfileScreen extends React.Component {
           </View>
           <ScrollView style={{ width: "85%", }}>
             <Text style={styles.descriptionBox}>{this.state.userDescription}</Text>
-            {/* <Text style={styles.locationHeader} >{'Likes: Animals'}</Text> */}
-            {/* <Text style={styles.locationHeader} >{'Dislikes: Planes'}</Text> */}
           </ScrollView>
         </View>
       </View>
@@ -237,7 +235,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   registrationForm: {
-    backgroundColor:'#ded3f6',
+    backgroundColor: '#ded3f6',
     width: '100%',
     height: '100%'
   },
@@ -246,7 +244,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   slider: {
-    marginLeft: 20,
+    marginLeft: 17,
   },
   header: {
     borderBottomWidth: 1,
@@ -280,7 +278,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontFamily: 'Avenir'
+    fontFamily: 'Avenir',
+    color: '#1273de'
   },
   profilePicture: {
     width: 300,

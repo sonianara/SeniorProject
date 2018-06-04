@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import Button from 'react-native-button';
 import SettingsList from 'react-native-settings-list';

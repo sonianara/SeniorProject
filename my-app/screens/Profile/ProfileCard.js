@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import * as React from 'react';
 import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import * as firebase from 'firebase';
@@ -28,7 +28,7 @@ export default class ProfileCard extends React.Component {
       this.db.getYesFromDatabase(user).then((yesArr) => {
         this.db.getUsersFromDatabase(user).then((jsonObj) => {
           for (let val in jsonObj) {
-            if ((val != ("user " + userInfo["id"])) &&
+            if (val != undefined && (val != ("user " + userInfo["id"])) &&
                 (yesArr.indexOf(val) < 0)) {
               arr.push(jsonObj[val]);
             }

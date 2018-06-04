@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Image, Alert, TouchableHighlight, AsyncStorage } from 'react-native';
 import facebookLogo from '../../resources/loginWithFacebook.png';
 import appLogo from '../../resources/appLogo.png';
+import logo from '../../resources/Logo.png';
 import Button from 'react-native-button';
 import * as firebase from 'firebase';
 import config from '../../App.js';
@@ -73,7 +74,7 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{ width: "80%", height: "18%" }} source={appLogo} />
+        <Image style={{ width: "80%", height: "18%" }} source={logo} />
         <TouchableHighlight onPress={this.logIn.bind(this)}>
           <Image source={facebookLogo} resizeMode={"center"} />
         </TouchableHighlight>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableOpacity} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,7 +10,7 @@ import DatabaseConnections from '../../backend/DatabaseConnections.js';
 import { Actions } from 'react-native-router-flux';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
-export default class MessageScreen extends Component {
+export default class MessageScreen extends React.Component {
 
    constructor() {
       super();
