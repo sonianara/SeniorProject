@@ -7,6 +7,7 @@ import config from '../../App.js';
 import * as firebase from 'firebase';
 import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 import DatabaseConnections from '../../backend/DatabaseConnections.js';
+import { Actions } from 'react-native-router-flux';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
 export default class MessageScreen extends Component {
@@ -57,13 +58,11 @@ export default class MessageScreen extends Component {
   }
 
    onPress = (userID, userName) => {
-     const { state, navigate } = this.props.navigation;
-     navigate('MessageStream', {recieverID: userID, recieverName: userName});
+     Actions.messageStream({recieverID: userID, recieverName: userName});
    }
 
    viewProfile = (userID) => {
-     const { state, navigate } = this.props.navigation;
-     navigate('MatchProfile', {userID: userID});
+     Actions.matchProfile({userID: userID});
    }
 
    renderBubble = ({item}) => {

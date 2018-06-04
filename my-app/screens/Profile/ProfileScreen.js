@@ -38,7 +38,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   newUser = () => {
-    return this.props.navigation.state.params.newUser;
+    return this.props.newUser;
   }
 
   setModalVisible = (visible) => {
@@ -57,13 +57,12 @@ export default class ProfileScreen extends React.Component {
       userDescription: userInfo.description,
     });
 
-/*
     if (this.newUser() == true) {
       this.setModalVisible(true);
       this.setState({ modalVisible: true });
     } else {
       this.setState({ modalVisible: false });
-    }*/
+    }
   }
 
   handleEdit = (newValue) => {

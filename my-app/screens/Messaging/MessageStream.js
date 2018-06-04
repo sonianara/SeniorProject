@@ -3,6 +3,7 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { Alert, StyleSheet, View, Text, Image } from 'react-native';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
 import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
 export default class MessageStream extends React.Component {
   constructor(props) {

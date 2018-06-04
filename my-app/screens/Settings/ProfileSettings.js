@@ -4,8 +4,9 @@ import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
 import EditGenderComponent from '../Settings/EditGenderSettings';
 import { getUser, saveUser } from '../../config/userinfo.js';
+import { Actions } from 'react-native-router-flux';
 
-export default class ProfileSettingsComponent extends Component {
+export default class ProfileSettingsComponent extends React.Component {
 
   constructor() {
     super();
@@ -39,11 +40,8 @@ export default class ProfileSettingsComponent extends Component {
     );
   }
 
-
   switchToEditText = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditSettings', {
-      go_back_key: state.key,
+    Actions.editSettings({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
@@ -51,9 +49,7 @@ export default class ProfileSettingsComponent extends Component {
   }
 
   switchToEditGender = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditGenderSettings', {
-      go_back_key: state.key,
+    Actions.editGenderSettings({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
@@ -61,13 +57,11 @@ export default class ProfileSettingsComponent extends Component {
   }
 
   switchToEditPicker = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditSettingsPicker', {
-      go_back_key: state.key,
+    Actions.editSettings({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
-    });
+    })
   }
 
   render() {
