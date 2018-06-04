@@ -22,7 +22,7 @@ export default class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       userID: 0,
-      modalVisible: true,
+      modalVisible: false,
       userName: "New User",
       birthday: new Date(),
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
@@ -213,8 +213,8 @@ export default class ProfileScreen extends React.Component {
           </View>
           <ScrollView style={{ width: "85%", }}>
             <Text style={styles.descriptionBox}>{this.state.userDescription}</Text>
-            <Text style={styles.locationHeader} >{'Likes: Animals'}</Text>
-            <Text style={styles.locationHeader} >{'Dislikes: Planes'}</Text>
+            {/* <Text style={styles.locationHeader} >{'Likes: Animals'}</Text> */}
+            {/* <Text style={styles.locationHeader} >{'Dislikes: Planes'}</Text> */}
           </ScrollView>
         </View>
       </View>

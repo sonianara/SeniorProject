@@ -7,6 +7,7 @@ import ProfileSettings from '../screens/Settings/ProfileSettings.js';
 import MessageScreen from '../screens/Messaging/MessageScreen.js';
 import MessageStream from '../screens/Messaging/MessageStream.js';
 import ProfileScreen from '../screens/Profile/ProfileScreen.js';
+import MatchProfile from '../screens/Profile/MatchProfile';
 import ExploreScreen from '../screens/Profile/ExploreScreen.js';
 import MainSettings from '../screens/Settings/MainSettings.js';
 import EditSettings from '../screens/Settings/EditSettings.js';
@@ -47,6 +48,9 @@ export const MessageFeedStack = StackNavigator({
   },
   MessageStream: {
     screen: MessageStream
+  },
+  MatchProfile: {
+    screen: MatchProfile
   }
 });
 

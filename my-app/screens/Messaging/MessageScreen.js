@@ -58,9 +58,13 @@ export default class MessageScreen extends Component {
 
    onPress = (userID, userName) => {
      const { state, navigate } = this.props.navigation;
-     navigate('MessageStream', {recieverID: userID, recieverName: userName})
+     navigate('MessageStream', {recieverID: userID, recieverName: userName});
    }
 
+   viewProfile = (userID) => {
+     const { state, navigate } = this.props.navigation;
+     navigate('MatchProfile', {userID: userID});
+   }
 
    renderBubble = ({item}) => {
      return (
@@ -72,7 +76,7 @@ export default class MessageScreen extends Component {
                'Message or View Profile?',
               [
                 {text: 'Send Message', onPress: () => this.onPress(item.key, item.name)},
-                {text: 'View Profile', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'View Profile', onPress: () => this.viewProfile(item.key), style: 'cancel'},
               ],
             )}>
            <Image style={ styles.image } source={{ uri: item.pic}} />
