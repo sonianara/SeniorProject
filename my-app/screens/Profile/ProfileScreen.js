@@ -73,9 +73,9 @@ export default class ProfileScreen extends React.Component {
       birthday: this.state.birthday,
       hometown: this.state.userLocation,
       gender: this.state.gender,
-      "interested age": this.state.interestedAge,
+      "interested age": "" + this.state.interestedAge[0] + "-" + this.state.interestedAge[1],
       "interested gender": this.state.interestedGender,
-      "interested distance": this.state.interestedDistance,
+      "interested distance": this.state.interestedDistance[0] + "-" + this.state.interestedDistance[1],
       description: this.state.userDescription,
     };
 
@@ -161,10 +161,12 @@ export default class ProfileScreen extends React.Component {
                   <Dropdown
                     label='Gender'
                     data={genders}
+                    onChangeText={(text) => this.setState({ gender: text })}
                   />
                   <Dropdown
                     label='Interested Gender'
                     data={genders}
+                    onChangeText={(text) => this.setState({ interestedGender: text })}
                   />
                   <Text style={{ fontSize: 16, marginBottom: 25, marginTop: 20 }}>
                     {"Interested Age: " + this.state.interestedAge[0] + " - " + this.state.interestedAge[1]}
