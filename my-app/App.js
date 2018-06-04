@@ -24,11 +24,16 @@ export const config = {
     storageBucket: "seniorproject-f58f9.appspot.com"
   };
 
-const TabIcon = ({ selected, title }) => {
-  return (
-    <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
-  );
-}
+const SettingsIcon = () => { return (<Icon name="settings" size={35} color='#d9d9d9' />); }
+const ProfileIcon = () => { return (<Icon name="account-circle" size={35} color='#d9d9d9' />); }
+const SearchIcon = () => { return (<Icon name="search" size={35} color='#d9d9d9' />); }
+const MessagesIcon = () => { return (<Icon name="message" size={35} color='#d9d9d9' />); }
+
+// const TabIcon = ({ selected, title }) => {
+//   return (
+//     <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
+//   );
+// }
 
 firebase.initializeApp(config);
 
@@ -44,7 +49,7 @@ export default class App extends React.Component {
             tabBarStyle={{ backgroundColor: '#FFFFFF' }}
           >
             {/* Tab and it's scenes */}
-            <Scene key="Settings" hideNavBar={true} title="Settings" icon={TabIcon}>
+            <Scene key="Settings" hideNavBar={true} title="Settings" icon={SettingsIcon}>
               <Scene
                 key="mainSettings"
                 component={MainSettings}
@@ -83,7 +88,7 @@ export default class App extends React.Component {
             </Scene>
 
             {/* Tab and it's scenes */}
-            <Scene key="Profile" hideNavBar={true} title="Profile" icon={TabIcon}>
+            <Scene key="Profile" hideNavBar={true} title="Profile" icon={ProfileIcon}>
               <Scene
                 key="profile"
                 component={ProfileScreen}
@@ -93,7 +98,7 @@ export default class App extends React.Component {
             </Scene>
 
             {/* Tab and it's scenes */}
-            <Scene key="Explore" hideNavBar={true} title="Explore" icon={TabIcon}>
+            <Scene key="Explore" hideNavBar={true} title="Explore" icon={SearchIcon}>
               <Scene
                 key="explore"
                 component={ExploreScreen}
@@ -102,22 +107,22 @@ export default class App extends React.Component {
             </Scene>
 
             {/* Tab and it's scenes */}
-            <Scene key="Messages" hideNavBar={true} title="Messages" icon={TabIcon}>
+            <Scene key="Messages" hideNavBar={true} title="Messages" icon={MessagesIcon}>
               <Scene
                 key="messageScreen"
                 component={MessageScreen}
-                hideNavBar={true}
+                hideNavBar={false}
               />
               <Scene
                 key="messageStream"
                 component={MessageStream}
-                hideNavBar={true}
+                hideNavBar={false}
                 onBack={() => Actions.messageScreen()}
               />
               <Scene
                 key="matchProfile"
                 component={MatchProfile}
-                hideNavBar={true}
+                hideNavBar={false}
                 onBack={() => Actions.messageStream()}
               />
             </Scene>
