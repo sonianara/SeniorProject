@@ -53,7 +53,7 @@ export default class AccountSettingsComponent extends React.Component {
             <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userEmail} hasNavArrow={false} title='Email' />
           </SettingsList>
           <View>
-            <Button onPress={() => Actions.mainSettings()} style={styles.logoutButton}>Logout</Button>
+            <Button onPress={() => Actions.loginScreen()} style={styles.logoutButton}>Logout</Button>
           </View>
         </View>
       </View>

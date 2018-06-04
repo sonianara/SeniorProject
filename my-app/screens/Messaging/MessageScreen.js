@@ -45,6 +45,7 @@ export default class MessageScreen extends Component {
               (val !== ("user " + userInfo["id"]))) {
               db.child('users/' + val).once('value')
                 .then((snapshot) => {
+                  console.log(snapshot.val().picture);
                   arr.push({ ["key"]: snapshot.val().id, ["pic"]: snapshot.val().picture, ["name"]: snapshot.val().name });
                   if (index === size) {
                     this.setState({ matches: arr });

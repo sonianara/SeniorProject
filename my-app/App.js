@@ -43,7 +43,7 @@ export default class App extends React.Component {
       <Router>
         <Scene key="root" hideNavBar={true}>
         {/* Tab Container */}
-        <Scene key="LoginScreen" component={LoginScreen} initial={true}/>
+        <Scene key="loginScreen" component={LoginScreen} initial={true}/>
           <Scene
             key="tabbar"
             tabs={true}
