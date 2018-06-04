@@ -24,10 +24,10 @@ export const config = {
     storageBucket: "seniorproject-f58f9.appspot.com"
   };
 
-const SettingsIcon = () => { return (<Icon name="settings" size={35} color='#d9d9d9' />); }
-const ProfileIcon = () => { return (<Icon name="account-circle" size={35} color='#d9d9d9' />); }
-const SearchIcon = () => { return (<Icon name="search" size={35} color='#d9d9d9' />); }
-const MessagesIcon = () => { return (<Icon name="message" size={35} color='#d9d9d9' />); }
+const SettingsIcon = () => { return (<Icon name="settings" size={35} color='#f47373' />); }
+const ProfileIcon = () => { return (<Icon name="account-circle" size={35} color='#f47373' />); }
+const SearchIcon = () => { return (<Icon name="search" size={35} color='#f47373' />); }
+const MessagesIcon = () => { return (<Icon name="message" size={35} color='#f47373' />); }
 
 // const TabIcon = ({ selected, title }) => {
 //   return (
