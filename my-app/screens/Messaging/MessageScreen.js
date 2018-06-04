@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     paddingBottom: 10,
     paddingTop: 10,
-    borderBottomColor: '#f47373',
-    borderTopColor: '#f47373',
+    borderBottomColor: '#432775',
+    borderTopColor: '#432775',
   },
   sender: {
     fontWeight: 'bold',

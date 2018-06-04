@@ -24,29 +24,23 @@ export const config = {
     storageBucket: "seniorproject-f58f9.appspot.com"
   };
 
-const SettingsIcon = () => { return (<Icon name="settings" size={35} color='#f47373' />); }
-const ProfileIcon = () => { return (<Icon name="account-circle" size={35} color='#f47373' />); }
-const SearchIcon = () => { return (<Icon name="search" size={35} color='#f47373' />); }
-const MessagesIcon = () => { return (<Icon name="message" size={35} color='#f47373' />); }
-
-// const TabIcon = ({ selected, title }) => {
-//   return (
-//     <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
-//   );
-// }
+const SettingsIcon = () => { return (<Icon name="settings" size={35} color='#ffcdd2' />); }
+const ProfileIcon = () => { return (<Icon name="account-circle" size={35} color='#ffcdd2' />); }
+const SearchIcon = () => { return (<Icon name="search" size={35} color='#ffcdd2' />); }
+const MessagesIcon = () => { return (<Icon name="message" size={35} color='#ffcdd2' />); }
 
 firebase.initializeApp(config);
 
 export default class App extends React.Component {
   render() {
     return (
-      <Router navigationBarStyle={{ backgroundColor: '#C1A9F6' }}>
+      <Router navigationBarStyle={{ backgroundColor: '#C1A9F6' }} >
         <Scene key="root" hideNavBar={true}>
         {/* Tab Container */}
         <Scene key="loginScreen" component={LoginScreen} initial={true}/>
           <Scene
             key="tabbar"
-            tabs={true}
+            tabs={true} labelStyle={{ color: '#432775'}}
             tabBarStyle={{ backgroundColor: '#C1A9F6' }}
           >
             {/* Tab and it's scenes */}
@@ -94,7 +88,6 @@ export default class App extends React.Component {
                 key="profileScreen"
                 component={ProfileScreen}
                 hideNavBar={false}
-                onBack={() => Actions.editSettings()}
               />
             </Scene>
 
