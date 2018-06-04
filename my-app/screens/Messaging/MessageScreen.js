@@ -116,9 +116,6 @@ export default class MessageScreen extends React.Component {
 
       return (
          <View style={styles.container}>
-            <View style={styles.header}>
-	             <Text style={styles.headerText}>Messages</Text>
-	          </View>
             <View style={styles.bubbleContainer}>
               <FlatList
                 data={this.state.matches}
@@ -190,10 +187,10 @@ const styles = StyleSheet.create({
   row: {
     borderBottomWidth: 1,
     borderTopWidth: 1,
-    paddingBottom: 7,
-    paddingTop: 7,
-    borderBottomColor: '#C1A9F6',
-    borderTopColor: '#C1A9F6',
+    paddingBottom: 10,
+    paddingTop: 10,
+    borderBottomColor: '#f47373',
+    borderTopColor: '#f47373',
   },
   sender: {
     fontWeight: 'bold',

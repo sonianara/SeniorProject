@@ -25,11 +25,8 @@ export default class ProfileCard extends React.Component {
     let arr = [];
     const user = getUser().then((user) => {
       var userInfo = JSON.parse(user);
-      console.log(`user info is ` + JSON.stringify(userInfo));
       this.db.getYesFromDatabase(user).then((yesArr) => {
         this.db.getUsersFromDatabase(user).then((jsonObj) => {
-          console.log('users are ' + JSON.stringify(jsonObj));
-          console.log('MY ID IS ' + userInfo.id);
           for (let val in jsonObj) {
             if ((val != ("user " + userInfo["id"]))) {
               // && (yesArr !== undefined) && (yesArr.length > 0) &&
@@ -39,7 +36,6 @@ export default class ProfileCard extends React.Component {
               }
             }
           }
-          console.log(`arr is ${arr}`);
           this.setState({ cards: arr, })
         });
       });

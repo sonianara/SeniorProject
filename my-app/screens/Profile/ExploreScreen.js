@@ -14,9 +14,6 @@ export default class ExploreScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Explore</Text>
-        </View>
           <ProfileCard />
       </View>
     );

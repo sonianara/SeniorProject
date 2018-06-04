@@ -21,8 +21,6 @@ export default class MatchNotification extends React.Component {
    }
 
    render() {
-      var bgColor = '#DCE3F4';
-
       return (
          <View style={styles.container}>
             <View style={styles.header}>

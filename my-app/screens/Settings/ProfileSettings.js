@@ -57,19 +57,16 @@ export default class ProfileSettingsComponent extends React.Component {
   }
 
   switchToEditPicker = (pageHeader, field) => {
-    Actions.editSettings({
+    Actions.editSettingsPicker({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
-    })
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Profile Settings</Text>
-        </View>
         <View style={styles.container}>
           <SettingsList borderColor='#ded3f6' defaultItemSize={50}>
             <SettingsList.Header headerText='My Profile Properties' headerStyle={styles.itemDivider} />

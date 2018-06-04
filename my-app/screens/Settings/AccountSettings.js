@@ -43,9 +43,6 @@ export default class AccountSettingsComponent extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Account Settings</Text>
-        </View>
         <View>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 5 }} />

@@ -16,9 +16,6 @@ export default class MainSettingsComponent extends React.Component {
    render() {
       return (
          <View style={styles.container}>
-            <View style={styles.header}>
-	             <Text style={styles.headerText}>Main Settings</Text>
-	          </View>
 	          <View>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>

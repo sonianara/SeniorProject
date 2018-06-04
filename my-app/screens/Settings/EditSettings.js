@@ -40,8 +40,8 @@ export default class EditSettingsComponent extends React.Component {
 
   render() {
     var bgColor = '#DCE3F4';
-    const pageHeader = this.state.pageHeader;
-    const field = this.state.fieldValue;
+    const pageHeader = this.props.pageHeader;
+    const field = this.props.fieldValue;
 
     return (
       <View style={styles.container}>

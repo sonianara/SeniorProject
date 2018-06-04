@@ -40,14 +40,14 @@ firebase.initializeApp(config);
 export default class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router navigationBarStyle={{ backgroundColor: '#C1A9F6' }}>
         <Scene key="root" hideNavBar={true}>
         {/* Tab Container */}
         <Scene key="loginScreen" component={LoginScreen} initial={true}/>
           <Scene
             key="tabbar"
             tabs={true}
-            tabBarStyle={{ backgroundColor: '#FFFFFF' }}
+            tabBarStyle={{ backgroundColor: '#C1A9F6' }}
           >
             {/* Tab and it's scenes */}
             <Scene key="Settings" hideNavBar={true} title="Settings" icon={SettingsIcon}>
@@ -55,12 +55,6 @@ export default class App extends React.Component {
                 key="mainSettings"
                 component={MainSettings}
                 hideNavBar={false}
-              />
-              <Scene
-                key="editSettings"
-                component={EditSettings}
-                hideNavBar={false}
-                onBack={() => Actions.mainSettings()}
               />
               <Scene
                 key="profileSettings"
@@ -79,6 +73,12 @@ export default class App extends React.Component {
                 component={EditSettingsPicker}
                 hideNavBar={false}
                 onBack={() => Actions.editSettings()}
+              />
+              <Scene
+                key="editSettings"
+                component={EditSettings}
+                hideNavBar={false}
+                onBack={() => Actions.mainSettings()}
               />
               <Scene
                 key="accountSettings"
