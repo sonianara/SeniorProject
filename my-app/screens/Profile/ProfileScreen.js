@@ -140,10 +140,8 @@ export default class ProfileScreen extends React.Component {
             transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => { alert("Modal has been closed"); }}>
-            <View style={{
-              marginTop: 100, marginLeft: 20,
-              flex: 1,
-            }}>
+            <View style={styles.registrationForm}>
+            <View style={styles.regFields}>
               <Text style={styles.titleText}>New User Registration</Text>
               <View>
                 <Text style={styles.mainText}>Birthday</Text>
@@ -204,6 +202,7 @@ export default class ProfileScreen extends React.Component {
                 }}>
                 <Text style={styles.submitButton}>Submit</Text>
               </TouchableOpacity>
+              </View>
             </View>
           </Modal>
           {/*<----------------- END MODAL --------------->*/}
@@ -233,10 +232,21 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   modal: {
-    flex: 1,
     backgroundColor: '#ded3f6',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  registrationForm: {
+    backgroundColor:'#ded3f6',
+    width: '100%',
+    height: '100%'
+  },
+  regFields: {
+    marginTop: 100,
+    marginLeft: 10
+  },
+  slider: {
+    marginLeft: 20,
   },
   header: {
     borderBottomWidth: 1,
@@ -252,8 +262,9 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontFamily: 'Avenir',
     marginBottom: 10,
   },
   headerText: {
@@ -269,6 +280,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Avenir'
   },
   profilePicture: {
     width: 300,
