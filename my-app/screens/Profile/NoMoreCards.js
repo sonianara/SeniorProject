@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import * as React from 'react';
 import {StyleSheet, Text, View, Image, Alert } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 

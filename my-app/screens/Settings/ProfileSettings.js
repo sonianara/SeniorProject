@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
 import EditGenderComponent from '../Settings/EditGenderSettings';
 import { getUser, saveUser } from '../../config/userinfo.js';
 
-export default class ProfileSettingsComponent extends Component {
+export default class ProfileSettingsComponent extends React.Component {
 
   constructor() {
     super();

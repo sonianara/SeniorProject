@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert, Slider } from 'react-native';
 import Prompt from 'rn-prompt';
 import SettingsList from 'react-native-settings-list';
@@ -6,7 +6,7 @@ import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
 
-export default class EditPickerComponent extends Component {
+export default class EditPickerComponent extends React.Component {
   constructor(props) {
     super(props);
     const { state, navigate } = this.props.navigation;

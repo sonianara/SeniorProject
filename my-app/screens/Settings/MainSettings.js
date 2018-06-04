@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import AccountSettings from '../../screens/Settings/AccountSettings.js';
 import ProfileSettings from '../../screens/Settings/ProfileSettings.js';
 
-export default class MainSettingsComponent extends Component {
+export default class MainSettingsComponent extends React.Component {
 
    constructor() {
       super();
@@ -19,7 +19,7 @@ export default class MainSettingsComponent extends Component {
             <View style={styles.header}>
 	             <Text style={styles.headerText}>Main Settings</Text>
 	          </View>
-	          <View style={{flex: 1}}>
+	          <View>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
 	              <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Profile Settings'

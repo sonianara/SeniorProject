@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, Alert, Button, FlatList, Image, List, ScrollView, TouchableOpacity} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,7 +9,7 @@ import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 import DatabaseConnections from '../../backend/DatabaseConnections.js';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
-export default class MessageScreen extends Component {
+export default class MessageScreen extends React.Component {
 
    constructor() {
       super();
@@ -58,9 +58,13 @@ export default class MessageScreen extends Component {
 
    onPress = (userID, userName) => {
      const { state, navigate } = this.props.navigation;
-     navigate('MessageStream', {recieverID: userID, recieverName: userName})
+     navigate('MessageStream', {recieverID: userID, recieverName: userName});
    }
 
+   viewProfile = (userID) => {
+     const { state, navigate } = this.props.navigation;
+     navigate('MatchProfile', {userID: userID});
+   }
 
    renderBubble = ({item}) => {
      return (
@@ -72,7 +76,7 @@ export default class MessageScreen extends Component {
                'Message or View Profile?',
               [
                 {text: 'Send Message', onPress: () => this.onPress(item.key, item.name)},
-                {text: 'View Profile', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'View Profile', onPress: () => this.viewProfile(item.key), style: 'cancel'},
               ],
             )}>
            <Image style={ styles.image } source={{ uri: item.pic}} />
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 64
   },
  image: {
-    height:128,
+    height: 128,
     width: 128,
     borderRadius: 64
   },
@@ -185,12 +189,18 @@ const styles = StyleSheet.create({
   },
   row: {
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderTopWidth: 1,
+    paddingBottom: 7,
+    paddingTop: 7,
+    borderBottomColor: '#C1A9F6',
+    borderTopColor: '#C1A9F6',
   },
   sender: {
-    fontWeight: '200',
+    fontWeight: 'bold',
     paddingRight: 10,
     fontSize: 18,
+    fontFamily: 'Avenir',
+    // color: '#4204b5'
   },
   arrowIcon: {
     position:'absolute',

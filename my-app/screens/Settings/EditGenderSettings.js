@@ -11,7 +11,7 @@ const deviceHeight = Dimensions.get('window').height;
 const genders = [{ gender: 'Female' }, { gender: 'Male' }, { gender: 'Male and Female'}, { gender: 'Other' }];
 const PickerItemIOS = PickerIOS.Item;
 
-export default class EditGenderComponent extends Component {
+export default class EditGenderComponent extends React.Component {
     constructor(props) {
         super(props);
 
