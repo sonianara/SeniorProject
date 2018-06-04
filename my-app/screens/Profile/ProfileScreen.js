@@ -14,6 +14,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Dropdown } from 'react-native-material-dropdown';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Actions } from 'react-native-router-flux';
 
 var moment = require('moment');
 

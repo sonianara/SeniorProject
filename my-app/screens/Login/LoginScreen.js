@@ -8,6 +8,7 @@ import config from '../../App.js';
 import ExploreScreen from '../../screens/Profile/ProfileScreen.js';
 import { getUser, saveUser } from '../../config/userinfo.js';
 import DatabaseConnections from '../../backend/DatabaseConnections.js';
+import { Actions } from 'react-native-router-flux';
 
 const APP_ID = "413413412439784";
 
@@ -41,7 +42,6 @@ export default class LoginScreen extends React.Component {
   }
 
   logIn = async () => {
-    const { state, navigate } = this.props.navigation;
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
       APP_ID,
       { permissions: ['public_profile', 'user_photos', 'user_birthday', 'user_hometown', 'email'] }
@@ -66,7 +66,7 @@ export default class LoginScreen extends React.Component {
         const dbInfo = await this.db.getUserFromDatabase(userInfo.id);
         saveUser(dbInfo);
       }
-      navigate('ProfileScreen', { go_back_key: state.key, newUser: newUser });
+      Actions.profileScreen({newUser: newUser });
     }
   }
 

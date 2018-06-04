@@ -36,90 +36,92 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <Scene key="root">
+        <Scene key="root" hideNavBar={true}>
         {/* Tab Container */}
+        <Scene key="LoginScreen" component={LoginScreen} initial={true}>
           <Scene
             key="tabbar"
             tabs={true}
             tabBarStyle={{ backgroundColor: '#FFFFFF' }}
           >
-            {/* Tab and it's scenes */}
-            <Scene key="Settings" hideNavBar={true} title="Settings" icon={TabIcon}>
-              <Scene
-                key="mainSettings"
-                component={MainSettings}
-                hideNavBar={false}
-              />
-              <Scene
-                key="editSettings"
-                component={EditSettings}
-                hideNavBar={false}
-                onBack={() => Actions.mainSettings()}
-              />
-              <Scene
-                key="profileSettings"
-                component={ProfileSettings}
-                hideNavBar={false}
-                onBack={() => Actions.mainSettings()}
-              />
-              <Scene
-                key="editGenderSettings"
-                component={EditGenderSettings}
-                hideNavBar={false}
-                onBack={() => Actions.profileSettings()}
-              />
-              <Scene
-                key="editSettingsPicker"
-                component={EditSettingsPicker}
-                hideNavBar={false}
-                onBack={() => Actions.editSettings()}
-              />
-              <Scene
-                key="accountSettings"
-                component={AccountSettings}
-                hideNavBar={false}
-                onBack={() => Actions.mainSettings()}
-              />
-            </Scene>
+              {/* Tab and it's scenes */}
+              <Scene key="Settings" hideNavBar={true} title="Settings" icon={TabIcon}>
+                <Scene
+                  key="mainSettings"
+                  component={MainSettings}
+                  hideNavBar={false}
+                />
+                <Scene
+                  key="editSettings"
+                  component={EditSettings}
+                  hideNavBar={false}
+                  onBack={() => Actions.mainSettings()}
+                />
+                <Scene
+                  key="profileSettings"
+                  component={ProfileSettings}
+                  hideNavBar={false}
+                  onBack={() => Actions.mainSettings()}
+                />
+                <Scene
+                  key="editGenderSettings"
+                  component={EditGenderSettings}
+                  hideNavBar={false}
+                  onBack={() => Actions.profileSettings()}
+                />
+                <Scene
+                  key="editSettingsPicker"
+                  component={EditSettingsPicker}
+                  hideNavBar={false}
+                  onBack={() => Actions.editSettings()}
+                />
+                <Scene
+                  key="accountSettings"
+                  component={AccountSettings}
+                  hideNavBar={false}
+                  onBack={() => Actions.mainSettings()}
+                />
+              </Scene>
 
-            {/* Tab and it's scenes */}
-            <Scene key="Profile" hideNavBar={true} title="Profile" icon={TabIcon}>
-              <Scene
-                key="profile"
-                component={ProfileScreen}
-                hideNavBar={false}
-                onBack={() => Actions.editSettings()}
-              />
-            </Scene>
+              {/* Tab and it's scenes */}
+              <Scene key="ProfileScreen" component={ProfileScreen} hideNavBar={true} title="Profile" icon={TabIcon}>
+                <Scene
+                  key="profileScreen"
+                  component={ProfileScreen}
+                  hideNavBar={false}
+                  onBack={() => Actions.editSettings()}
+                />
+              </Scene>
 
-            {/* Tab and it's scenes */}
-            <Scene key="Explore" hideNavBar={true} title="Explore" icon={TabIcon}>
-              <Scene
-                key="explore"
-                component={ExploreScreen}
-                hideNavBar={false}
-              />
-            </Scene>
+              {/* Tab and it's scenes */}
+              <Scene key="Explore" hideNavBar={true} title="Explore" icon={TabIcon}>
+                <Scene
+                  key="explore"
+                  component={ExploreScreen}
+                  hideNavBar={false}
+                />
+              </Scene>
 
-            {/* Tab and it's scenes */}
-            <Scene key="Messages" hideNavBar={true} title="Messages" icon={TabIcon}>
-              <Scene
-                key="messageScreen"
-                component={MessageScreen}
-                hideNavBar={true}
-              />
-              <Scene
-                key="messageStream"
-                component={MessageStream}
-                hideNavBar={true}
-                onBack={() => Actions.messageScreen()}
-              />
-              <Scene
-                key="matchProfile"
-                component={MatchProfile}
-                hideNavBar={true}
-                onBack={() => Actions.messageStream()}
-              />
+              {/* Tab and it's scenes */}
+              <Scene key="Messages" hideNavBar={true} title="Messages" icon={TabIcon}>
+                <Scene
+                  key="messageScreen"
+                  component={MessageScreen}
+                  hideNavBar={false}
+                />
+                <Scene
+                  key="messageStream"
+                  component={MessageStream}
+                  hideNavBar={false}
+                  onBack={() => Actions.messageScreen()}
+                />
+                <Scene
+                  key="matchProfile"
+                  component={MatchProfile}
+                  hideNavBar={false}
+                  onBack={() => Actions.messageStream()}
+                />
+              </Scene>
             </Scene>
           </Scene>
         </Scene>
