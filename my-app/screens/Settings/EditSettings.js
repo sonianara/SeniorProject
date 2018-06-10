@@ -5,16 +5,16 @@ import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
+import { Actions } from 'react-native-router-flux';
 
 export default class EditSettingsComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { state, navigate } = this.props.navigation;
     this.state = {
       userID: "0",
       userName: "New User",
-      category: state.params.pageHeader,
-      inputText: state.params.fieldValue,
+      category: this.props.pageHeader,
+      inputText: this.props.fieldValue,
       promptVisible: false
     };
   }
@@ -35,14 +35,13 @@ export default class EditSettingsComponent extends React.Component {
     firebase.database().ref('users/user ' + this.state.userID).update(updatedJSON);
     updateUserFields(updatedJSON);
     this.setState({ inputText: newValue, promptVisible: false });
-    this.props.navigation.state.params.onNavigateBack();
+    this.props.onNavigateBack();
   }
 
   render() {
     var bgColor = '#DCE3F4';
-    const { state, navigate } = this.props.navigation;
-    const pageHeader = state.params.pageHeader;
-    const field = state.params.fieldValue;
+    const pageHeader = this.props.pageHeader;
+    const field = this.props.fieldValue;
 
     return (
       <View style={styles.container}>

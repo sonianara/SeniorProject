@@ -47,9 +47,6 @@ export default class MatchProfile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>View Profile</Text>
-        </View>
         <View style={styles.modal}>
           <View style={styles.basicInfo}>
             <Text style={styles.nameHeader} >{this.state.userName + ", " + this.state.userAge}</Text>
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ded3f6',
     alignItems: 'center',
     borderBottomWidth: 4,
-    borderBottomColor: '#C1A9F6',
+    borderBottomColor: '#f47373',
   },
   headerText: {
     alignSelf: 'center',

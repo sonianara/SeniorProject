@@ -7,6 +7,7 @@ import config from '../../App.js';
 import * as firebase from 'firebase';
 import { getUser, getMatch, saveMatch } from '../../config/userinfo.js';
 import DatabaseConnections from '../../backend/DatabaseConnections.js';
+import { Actions } from 'react-native-router-flux';
 
 /********* USE REACT-NATIVE-LIST-VIEW *************/
 export default class MessageScreen extends React.Component {
@@ -44,6 +45,7 @@ export default class MessageScreen extends React.Component {
               (val !== ("user " + userInfo["id"]))) {
               db.child('users/' + val).once('value')
                 .then((snapshot) => {
+                  console.log(snapshot.val().picture);
                   arr.push({ ["key"]: snapshot.val().id, ["pic"]: snapshot.val().picture, ["name"]: snapshot.val().name });
                   if (index === size) {
                     this.setState({ matches: arr });
@@ -57,13 +59,11 @@ export default class MessageScreen extends React.Component {
   }
 
    onPress = (userID, userName) => {
-     const { state, navigate } = this.props.navigation;
-     navigate('MessageStream', {recieverID: userID, recieverName: userName});
+     Actions.messageStream({recieverID: userID, recieverName: userName});
    }
 
    viewProfile = (userID) => {
-     const { state, navigate } = this.props.navigation;
-     navigate('MatchProfile', {userID: userID});
+     Actions.matchProfile({userID: userID});
    }
 
    renderBubble = ({item}) => {
@@ -116,9 +116,6 @@ export default class MessageScreen extends React.Component {
 
       return (
          <View style={styles.container}>
-            <View style={styles.header}>
-	             <Text style={styles.headerText}>Messages</Text>
-	          </View>
             <View style={styles.bubbleContainer}>
               <FlatList
                 data={this.state.matches}
@@ -190,10 +187,10 @@ const styles = StyleSheet.create({
   row: {
     borderBottomWidth: 1,
     borderTopWidth: 1,
-    paddingBottom: 7,
-    paddingTop: 7,
-    borderBottomColor: '#C1A9F6',
-    borderTopColor: '#C1A9F6',
+    paddingBottom: 10,
+    paddingTop: 10,
+    borderBottomColor: '#432775',
+    borderTopColor: '#432775',
   },
   sender: {
     fontWeight: 'bold',

@@ -7,6 +7,7 @@ import MainSettings from '../Settings/MainSettings.js';
 import Tabs from '../../config/routes';
 import { getUser, saveUser } from '../../config/userinfo.js';
 import { NavigationActions } from 'react-navigation';
+import { Actions } from 'react-native-router-flux';
 
 export default class AccountSettingsComponent extends React.Component {
 
@@ -32,25 +33,16 @@ export default class AccountSettingsComponent extends React.Component {
     );
   }
 
-  logout = () => {
-    const { state, navigate } = this.props.navigation;
-    navigate('LoginScreen');
-  }
-
   onValueChange(value) {
     this.setState({ switchValue: value });
   }
 
   render() {
 
-    const { state, navigate } = this.props.navigation;
     var bgColor = '#DCE3F4';
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Account Settings</Text>
-        </View>
         <View>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{ marginTop: 5 }} />
@@ -58,7 +50,7 @@ export default class AccountSettingsComponent extends React.Component {
             <SettingsList.Item titleStyle={styles.itemTextStyle} titleInfo={this.state.userEmail} hasNavArrow={false} title='Email' />
           </SettingsList>
           <View>
-            <Button onPress={this.logout.bind(this)} style={styles.logoutButton}>Logout</Button>
+            <Button onPress={() => Actions.loginScreen()} style={styles.logoutButton}>Logout</Button>
           </View>
         </View>
       </View>

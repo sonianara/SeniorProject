@@ -43,8 +43,6 @@ export default class Card extends React.Component {
           </View>
           <ScrollView style={styles.scrollbox}>
             <Text style={styles.descriptionBox}>{this.props.description}</Text>
-            <Text style={styles.locationHeader} >{'Likes: '}</Text>
-            <Text style={styles.locationHeader} >{'Dislikes: '}</Text>
           </ScrollView>
         </View>
       </View>
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ded3f6',
     alignItems: 'center',
     borderBottomWidth: 4,
-    borderBottomColor: '#C1A9F6',
+    borderBottomColor: '#f47373',
   },
   nameHeader: {
     marginTop: 10,

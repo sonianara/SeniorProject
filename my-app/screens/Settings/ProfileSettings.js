@@ -4,6 +4,7 @@ import SettingsList from 'react-native-settings-list';
 import EditSettingsComponent from '../Settings/EditSettings';
 import EditGenderComponent from '../Settings/EditGenderSettings';
 import { getUser, saveUser } from '../../config/userinfo.js';
+import { Actions } from 'react-native-router-flux';
 
 export default class ProfileSettingsComponent extends React.Component {
 
@@ -39,11 +40,8 @@ export default class ProfileSettingsComponent extends React.Component {
     );
   }
 
-
   switchToEditText = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditSettings', {
-      go_back_key: state.key,
+    Actions.editSettings({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
@@ -51,9 +49,7 @@ export default class ProfileSettingsComponent extends React.Component {
   }
 
   switchToEditGender = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditGenderSettings', {
-      go_back_key: state.key,
+    Actions.editGenderSettings({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
@@ -61,9 +57,7 @@ export default class ProfileSettingsComponent extends React.Component {
   }
 
   switchToEditPicker = (pageHeader, field) => {
-    const { state, navigate } = this.props.navigation;
-    navigate('EditSettingsPicker', {
-      go_back_key: state.key,
+    Actions.editSettingsPicker({
       onNavigateBack: this.componentWillMount,
       pageHeader: pageHeader,
       fieldValue: field
@@ -73,9 +67,6 @@ export default class ProfileSettingsComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Profile Settings</Text>
-        </View>
         <View style={styles.container}>
           <SettingsList borderColor='#ded3f6' defaultItemSize={50}>
             <SettingsList.Header headerText='My Profile Properties' headerStyle={styles.itemDivider} />

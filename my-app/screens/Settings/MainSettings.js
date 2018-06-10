@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Alert} from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import AccountSettings from '../../screens/Settings/AccountSettings.js';
 import ProfileSettings from '../../screens/Settings/ProfileSettings.js';
+import { Actions } from 'react-native-router-flux';
 
 export default class MainSettingsComponent extends React.Component {
 
@@ -13,21 +14,17 @@ export default class MainSettingsComponent extends React.Component {
    }
 
    render() {
-      const { state, navigate } = this.props.navigation;
       return (
          <View style={styles.container}>
-            <View style={styles.header}>
-	             <Text style={styles.headerText}>Main Settings</Text>
-	          </View>
 	          <View>
               <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
                 <SettingsList.Header headerStyle={{marginTop:15}}/>
 	              <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Profile Settings'
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
-			             onPress={() => navigate('ProfileSettings', { go_back_key: state.key })}/>
+			             onPress={() => Actions.profileSettings()}/>
                 <SettingsList.Item titleStyle={styles.itemTextStyle} hasNavArrow={true} title='Account Settings'
 			             switchState={this.state.switchValue} switchOnValueChange={this.onValueChange}
-			             onPress={() => navigate('AccountSettings', { go_back_key: state.key })}/>
+			             onPress={() => Actions.accountSettings()}/>
               </SettingsList>
            </View>
         </View>

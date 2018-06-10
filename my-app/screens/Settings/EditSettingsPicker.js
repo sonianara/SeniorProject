@@ -5,17 +5,17 @@ import SettingsList from 'react-native-settings-list';
 import { Header } from 'react-native-elements';
 import * as firebase from 'firebase';
 import { getUser, saveUser, updateUserFields } from '../../config/userinfo.js';
+import { Actions } from 'react-native-router-flux';
 
 export default class EditPickerComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { state, navigate } = this.props.navigation;
-    const range = (state.params.fieldValue).split('-');
+    const range = (this.props.fieldValue).split('-');
     this.state = {
       userID: "0",
       userName: "New User",
-      category: state.params.pageHeader,
-      inputText: state.params.fieldValue,
+      category: this.props.pageHeader,
+      inputText: this.props.fieldValue,
       inputMin: range[0],
       inputMax: (range.length > 0 ? range[1] : range[0]),
     };
@@ -37,7 +37,7 @@ export default class EditPickerComponent extends React.Component {
     firebase.database().ref('users/user ' + this.state.userID).update(updatedJSON);
     updateUserFields(updatedJSON);
     this.setState({ inputText: newValue, promptVisible: false });
-    this.props.navigation.state.params.onNavigateBack();
+    this.props.onNavigateBack();
   }
 
   updateValue = () => {
@@ -53,7 +53,7 @@ export default class EditPickerComponent extends React.Component {
   }
 
   render() {
-    const pageHeader = this.props.navigation.state.params.pageHeader;
+    const pageHeader = this.props.pageHeader;
     const maxValue = pageHeader === 'Interested Age' ? 50 : 200;
     const minValue = pageHeader === 'Interested Age' ? 18 : 0;
     const step = pageHeader === 'Interested Age' ? 1 : 10;

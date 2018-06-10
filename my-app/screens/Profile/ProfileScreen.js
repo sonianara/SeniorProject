@@ -14,6 +14,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Dropdown } from 'react-native-material-dropdown';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Actions } from 'react-native-router-flux';
 
 var moment = require('moment');
 
@@ -22,7 +23,7 @@ export default class ProfileScreen extends React.Component {
     super(props);
     this.state = {
       userID: 0,
-      modalVisible: true,
+      modalVisible: false,
       userName: "New User",
       birthday: new Date(),
       userPicture: "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png",
@@ -38,7 +39,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   newUser = () => {
-    return this.props.navigation.state.params.newUser;
+    return this.props.newUser;
   }
 
   setModalVisible = (visible) => {
@@ -72,9 +73,9 @@ export default class ProfileScreen extends React.Component {
       birthday: this.state.birthday,
       hometown: this.state.userLocation,
       gender: this.state.gender,
-      "interested age": this.state.interestedAge,
+      "interested age": "" + this.state.interestedAge[0] + "-" + this.state.interestedAge[1],
       "interested gender": this.state.interestedGender,
-      "interested distance": this.state.interestedDistance,
+      "interested distance": this.state.interestedDistance[0] + "-" + this.state.interestedDistance[1],
       description: this.state.userDescription,
     };
 
@@ -129,9 +130,6 @@ export default class ProfileScreen extends React.Component {
     }];
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>My Profile</Text>
-        </View>
         <View style={styles.modal}>
           {/*---------------------- REGISTRATION MODAL ---------------------->*/}
           <Modal
@@ -163,10 +161,12 @@ export default class ProfileScreen extends React.Component {
                   <Dropdown
                     label='Gender'
                     data={genders}
+                    onChangeText={(text) => this.setState({ gender: text })}
                   />
                   <Dropdown
                     label='Interested Gender'
                     data={genders}
+                    onChangeText={(text) => this.setState({ interestedGender: text })}
                   />
                   <Text style={{ fontSize: 16, marginBottom: 25, marginTop: 20 }}>
                     {"Interested Age: " + this.state.interestedAge[0] + " - " + this.state.interestedAge[1]}
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ded3f6',
     alignItems: 'center',
     borderBottomWidth: 4,
-    borderBottomColor: '#C1A9F6',
+    borderBottomColor: '#f47373',
   },
   titleText: {
     fontSize: 20,
